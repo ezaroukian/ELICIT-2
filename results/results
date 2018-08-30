@@ -1,0 +1,248 @@
+#
+# Results on Thursday August 30 2018 13:41:07 UTC.
+# USER AGENT: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0
+# Design number was non-random = 0
+#
+#
+# Results on Thursday August 30 2018 16:54:52 UTC.
+# USER AGENT: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0
+# Design number was non-random = 1
+#
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+# 10. Field text.
+# 11. Field correct text.
+# 12. Field correct.
+# 13. _REACTION_TIME_.
+1535648092,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,test,NULL,who,Gold,Gold group,Violet group,False,49018
+1535648092,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,test,NULL,what,port,port,financial institution,False,49018
+1535648092,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,test,NULL,where,Psiland*,Psiland,Psiland,True,49018
+1535648092,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,test,NULL,month,November,November,April,False,49018
+1535648092,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,test,NULL,day,18,18,5,False,49018
+1535648092,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,test,NULL,time,7:00,7:00,11:00,False,49018
+1535648092,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,test,NULL,ampm,AM*,AM,AM,True,49018
+#
+# Results on Thursday August 30 2018 17:12:33 UTC.
+# USER AGENT: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0
+# Design number was non-random = 2
+#
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+# 10. Field text.
+# 11. Field correct text.
+# 12. Field correct.
+# 13. _REACTION_TIME_.
+1535649153,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,who,Cube*,Cube group,Cube group,True,19394
+1535649153,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,what,military-base,military base,hotel,False,19394
+1535649153,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,where,Lemurland,Lemurland,Gibbonland,False,19394
+1535649153,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,month,October,October,January,False,19394
+1535649153,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,day,17,17,1,False,19394
+1535649153,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,time,11:00*,11:00,11:00,True,19394
+1535649153,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,ampm,PM*,PM,PM,True,19394
+1535649153,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,testing,NULL,who,Violet*,Violet group,Violet group,True,19186
+1535649153,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,testing,NULL,what,financial-institution*,financial institution,financial institution,True,19186
+1535649153,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,testing,NULL,where,Upsilonland,Upsilonland,Psiland,False,19186
+1535649153,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,testing,NULL,month,September,September,April,False,19186
+1535649153,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,testing,NULL,day,12,12,5,False,19186
+1535649153,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,testing,NULL,time,4:00,4:00,11:00,False,19186
+1535649153,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,testing,NULL,ampm,PM,PM,AM,False,19186
+#
+# Results on Thursday August 30 2018 17:33:29 UTC.
+# USER AGENT: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0
+# Design number was non-random = 3
+#
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+# 10. Field text.
+# 11. Field correct text.
+# 12. Field correct.
+# 13. _REACTION_TIME_.
+1535650409,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,who,Tetrahedron,Tetrahedron group,Cube group,False,10646
+1535650409,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,what,hotel*,hotel,hotel,True,10646
+1535650409,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,where,Lemurland,Lemurland,Gibbonland,False,10646
+1535650409,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,month,November,November,January,False,10646
+1535650409,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,day,17,17,1,False,10646
+1535650409,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,time,8:00,8:00,11:00,False,10646
+1535650409,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,ampm,PM*,PM,PM,True,10646
+1535650409,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,testing,NULL,who,Violet*,Violet group,Violet group,True,50070
+1535650409,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,testing,NULL,what,train,train station,financial institution,False,50070
+1535650409,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,testing,NULL,where,Tauland,Tauland,Psiland,False,50070
+1535650409,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,testing,NULL,month,September,September,April,False,50070
+1535650409,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,testing,NULL,day,13,13,5,False,50070
+1535650409,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,testing,NULL,time,9:00,9:00,11:00,False,50070
+1535650409,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,testing,NULL,ampm,AM*,AM,AM,True,50070
+#
+# Results on Thursday August 30 2018 18:43:54 UTC.
+# USER AGENT: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0
+# Design number was non-random = 4
+#
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+# 10. Field text.
+# 11. Field correct text.
+# 12. Field correct.
+# 13. _REACTION_TIME_.
+1535654635,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,who,Tetrahedron,Tetrahedron group,Cube group,False,14882
+1535654635,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,what,hotel*,hotel,hotel,True,14882
+1535654635,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,where,Gibbonland*,Gibbonland,Gibbonland,True,14882
+1535654635,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,month,January*,January,January,True,14882
+1535654635,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,day,1*,1,1,True,14882
+1535654635,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,time,2:00,2:00,11:00,False,14882
+1535654635,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,ampm,AM,AM,PM,False,14882
+1535654635,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,testing,NULL,who,Tetrahedron,Tetrahedron group,Cube group,False,6370
+1535654635,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,testing,NULL,what,hotel*,hotel,hotel,True,6370
+1535654635,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,testing,NULL,where,Gibbonland*,Gibbonland,Gibbonland,True,6370
+1535654635,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,testing,NULL,month,January*,January,January,True,6370
+1535654635,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,testing,NULL,day,2,2,1,False,6370
+1535654635,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,testing,NULL,time,1:00,1:00,11:00,False,6370
+1535654635,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,testing,NULL,ampm,PM*,PM,PM,True,6370
+1535654635,f41fe12e6a7a5a93328e525a8f6e864a,FormC,2,0,testing,NULL,who,Violet*,Violet group,Violet group,True,27398
+1535654635,f41fe12e6a7a5a93328e525a8f6e864a,FormC,2,0,testing,NULL,what,financial-institution*,financial institution,financial institution,True,27398
+1535654635,f41fe12e6a7a5a93328e525a8f6e864a,FormC,2,0,testing,NULL,where,Tauland,Tauland,Psiland,False,27398
+1535654635,f41fe12e6a7a5a93328e525a8f6e864a,FormC,2,0,testing,NULL,month,December,December,April,False,27398
+1535654635,f41fe12e6a7a5a93328e525a8f6e864a,FormC,2,0,testing,NULL,day,18,18,5,False,27398
+1535654635,f41fe12e6a7a5a93328e525a8f6e864a,FormC,2,0,testing,NULL,time,11:00*,11:00,11:00,True,27398
+1535654635,f41fe12e6a7a5a93328e525a8f6e864a,FormC,2,0,testing,NULL,ampm,AM*,AM,AM,True,27398
+#
+# Results on Thursday August 30 2018 19:06:33 UTC.
+# USER AGENT: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0
+# Design number was non-random = 5
+#
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+# 10. Field text.
+# 11. Field correct text.
+# 12. Field correct.
+# 13. _REACTION_TIME_.
+1535655993,f41fe12e6a7a5a93328e525a8f6e864a,FormC,2,0,testing,NULL,who,Tetrahedron,Tetrahedron group,Cube group,False,11000
+1535655993,f41fe12e6a7a5a93328e525a8f6e864a,FormC,2,0,testing,NULL,what,hotel*,hotel,hotel,True,11000
+1535655993,f41fe12e6a7a5a93328e525a8f6e864a,FormC,2,0,testing,NULL,where,Gibbonland*,Gibbonland,Gibbonland,True,11000
+1535655993,f41fe12e6a7a5a93328e525a8f6e864a,FormC,2,0,testing,NULL,month,January*,January,January,True,11000
+1535655993,f41fe12e6a7a5a93328e525a8f6e864a,FormC,2,0,testing,NULL,day,1*,1,1,True,11000
+1535655993,f41fe12e6a7a5a93328e525a8f6e864a,FormC,2,0,testing,NULL,time,2:00,2:00,11:00,False,11000
+1535655993,f41fe12e6a7a5a93328e525a8f6e864a,FormC,2,0,testing,NULL,ampm,AM,AM,PM,False,11000
+1535655993,f41fe12e6a7a5a93328e525a8f6e864a,FormC,3,0,testing,NULL,who,Purple,Purple group,Violet group,False,13356
+1535655993,f41fe12e6a7a5a93328e525a8f6e864a,FormC,3,0,testing,NULL,what,port,port,financial institution,False,13356
+1535655993,f41fe12e6a7a5a93328e525a8f6e864a,FormC,3,0,testing,NULL,where,Tauland,Tauland,Psiland,False,13356
+1535655993,f41fe12e6a7a5a93328e525a8f6e864a,FormC,3,0,testing,NULL,month,December,December,April,False,13356
+1535655993,f41fe12e6a7a5a93328e525a8f6e864a,FormC,3,0,testing,NULL,day,18,18,5,False,13356
+1535655993,f41fe12e6a7a5a93328e525a8f6e864a,FormC,3,0,testing,NULL,time,10:00,10:00,11:00,False,13356
+1535655993,f41fe12e6a7a5a93328e525a8f6e864a,FormC,3,0,testing,NULL,ampm,AM*,AM,AM,True,13356
+#
+# Results on Thursday August 30 2018 19:17:36 UTC.
+# USER AGENT: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0
+# Design number was non-random = 6
+#
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+# 10. Field text.
+# 11. Field correct text.
+# 12. Field correct.
+# 13. _REACTION_TIME_.
+1535656656,f41fe12e6a7a5a93328e525a8f6e864a,FormC,2,0,testing,NULL,who,Cube*,Cube group,Cube group,True,13722
+1535656656,f41fe12e6a7a5a93328e525a8f6e864a,FormC,2,0,testing,NULL,what,military-base,military base,hotel,False,13722
+1535656656,f41fe12e6a7a5a93328e525a8f6e864a,FormC,2,0,testing,NULL,where,Gibbonland*,Gibbonland,Gibbonland,True,13722
+1535656656,f41fe12e6a7a5a93328e525a8f6e864a,FormC,2,0,testing,NULL,month,December,December,January,False,13722
+1535656656,f41fe12e6a7a5a93328e525a8f6e864a,FormC,2,0,testing,NULL,day,1*,1,1,True,13722
+1535656656,f41fe12e6a7a5a93328e525a8f6e864a,FormC,2,0,testing,NULL,time,1:00,1:00,11:00,False,13722
+1535656656,f41fe12e6a7a5a93328e525a8f6e864a,FormC,2,0,testing,NULL,ampm,AM,AM,PM,False,13722
+1535656656,f41fe12e6a7a5a93328e525a8f6e864a,FormC,3,0,testing,NULL,who,Purple,Purple group,Violet group,False,16692
+1535656656,f41fe12e6a7a5a93328e525a8f6e864a,FormC,3,0,testing,NULL,what,financial-institution*,financial institution,financial institution,True,16692
+1535656656,f41fe12e6a7a5a93328e525a8f6e864a,FormC,3,0,testing,NULL,where,Tauland,Tauland,Psiland,False,16692
+1535656656,f41fe12e6a7a5a93328e525a8f6e864a,FormC,3,0,testing,NULL,month,October,October,April,False,16692
+1535656656,f41fe12e6a7a5a93328e525a8f6e864a,FormC,3,0,testing,NULL,day,30,30,5,False,16692
+1535656656,f41fe12e6a7a5a93328e525a8f6e864a,FormC,3,0,testing,NULL,time,10:00,10:00,11:00,False,16692
+1535656656,f41fe12e6a7a5a93328e525a8f6e864a,FormC,3,0,testing,NULL,ampm,AM*,AM,AM,True,16692
+#
+# Results on Thursday August 30 2018 20:34:52 UTC.
+# USER AGENT: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0
+# Design number was non-random = 7
+#
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+# 10. Field text.
+# 11. Field correct text.
+# 12. Field correct.
+# 13. _REACTION_TIME_.
+1535661293,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,who,Tetrahedron,Tetrahedron group,Cube group,False,5276
+1535661293,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,what,hotel*,hotel,hotel,True,5276
+1535661293,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,where,Gibbonland*,Gibbonland,Gibbonland,True,5276
+1535661293,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,month,January*,January,January,True,5276
+1535661293,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,day,2,2,1,False,5276
+1535661293,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,time,1:00,1:00,11:00,False,5276
+1535661293,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,ampm,AM,AM,PM,False,5276
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+1535661293,f41fe12e6a7a5a93328e525a8f6e864a,Form,2,0,comments,NULL,comments,wewewewewe
+1535661293,f41fe12e6a7a5a93328e525a8f6e864a,Form,2,0,comments,NULL,notes,No
+1535661293,f41fe12e6a7a5a93328e525a8f6e864a,Form,3,0,end.b,NULL,mental,2
+1535661293,f41fe12e6a7a5a93328e525a8f6e864a,Form,3,0,end.b,NULL,physical,7
+1535661293,f41fe12e6a7a5a93328e525a8f6e864a,Form,3,0,end.b,NULL,temp,6
+1535661293,f41fe12e6a7a5a93328e525a8f6e864a,Form,3,0,end.b,NULL,success,9
+1535661293,f41fe12e6a7a5a93328e525a8f6e864a,Form,3,0,end.b,NULL,perf,9
+1535661293,f41fe12e6a7a5a93328e525a8f6e864a,Form,3,0,end.b,NULL,stress,15
+1535661293,f41fe12e6a7a5a93328e525a8f6e864a,Form,3,0,end.b,NULL,preference,12

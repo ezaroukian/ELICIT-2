@@ -1,0 +1,53 @@
+.who {
+    background-color: blue;
+	color: white;
+}
+.what {
+    background-color: green;
+	color: white;
+}
+.when {
+    background-color: brown;
+	color: white;
+}
+.where {
+    background-color: red;
+	color: white;
+}
+	
+.df {/*Futile*/
+    font-style: italic;
+	color: gray;
+}
+.ans {
+  overflow: hidden;
+  background-color: #DDD;
+  opacity: 0.95; /* CSS3 */
+  position: fixed;
+  bottom: 20px; 
+  width: 650px;
+  padding: 16px;
+  margin-left: -16px;
+}
+.scenario {
+  margin: 0 auto;
+  width: 650px;
+  margin-bottom: 300px; /* Not sure what this is doing:   padding-bottom: 1450px;*/
+  height: 100%; /* To enable scrolling, not sure the value is doing anything */
+}
+.clock {
+	font-weight:bold;
+	color:black;
+}
+.clockEnd {
+	font-weight:bold;
+	color:red;
+}
+.incorrect {
+	font-weight:bold;
+	color:red;
+}
+.correct {
+	font-weight:bold;
+	color:black;
+}

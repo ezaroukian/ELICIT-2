@@ -1,0 +1,23 @@
+<script>
+//if value doesn't end in *, color red/incorrect
+function colorAnswer(ansArray){
+	if(ansArray[4][1]==false){
+		return '<span class="ELICIT-incorrect">'+ansArray[2][1]+'</span> ('+ansArray[3][1]+")";
+	}
+	else{
+		return '<span class="ELICIT-correct">'+ansArray[2][1]+'</span>';
+	}
+}
+
+var ans = "Who? "+colorAnswer(saveForLater[0])+"<br> What? "+colorAnswer(saveForLater[1])+"<br> Where? "+colorAnswer(saveForLater[2])+"<br> When? "+colorAnswer(saveForLater[3])+" "+colorAnswer(saveForLater[4])+" at "+colorAnswer(saveForLater[5])+" "+colorAnswer(saveForLater[6]);
+
+
+document.getElementById("answers").innerHTML = ans; 
+</script>
+
+<p>You selected:</p>
+
+<p id="answers">Your answers should appear here</p>
+
+<p class="Question-instructions-text">Incorrect answers are shown in <span class="incorrect">red</span> with corrections in parentheses.<p>
+
