@@ -6,7 +6,7 @@ function loadFiles(rootName, condition){
 	
 	console.log("Loading "+scenarioFile+", "+answerFile);
 	
-	$.getScript("clock.js", function( data, textStatus, jqxhr ) {
+	$.getScript(rawgit+"clock.js", function( data, textStatus, jqxhr ) {
 		console.log( "Clock loading: " + textStatus + ", " + jqxhr.status );
 		//console.log( data ); // Data returned
 	});
