@@ -173,7 +173,7 @@ jqueryWidget: {
 
 properties: {
     obligatory: ["html"],
-    countsForProgressBar: false,
+    countsForProgressBar: true,
     htmlDescription: function (opts) {
         return htmlCodeToDOM(opts.html);
     }

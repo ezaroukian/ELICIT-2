@@ -246,3 +246,64 @@
 1535661293,f41fe12e6a7a5a93328e525a8f6e864a,Form,3,0,end.b,NULL,perf,9
 1535661293,f41fe12e6a7a5a93328e525a8f6e864a,Form,3,0,end.b,NULL,stress,15
 1535661293,f41fe12e6a7a5a93328e525a8f6e864a,Form,3,0,end.b,NULL,preference,12
+#
+# Results on Tuesday September 04 2018 17:33:03 UTC.
+# USER AGENT: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0
+# Design number was non-random = 8
+#
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+# 10. Field text.
+# 11. Field correct text.
+# 12. Field correct.
+# 13. _REACTION_TIME_.
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,who,Tetrahedron,Tetrahedron group,Cube group,False,5934
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,what,hotel*,hotel,hotel,True,5934
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,where,Gibbonland*,Gibbonland,Gibbonland,True,5934
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,month,January*,January,January,True,5934
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,day,1*,1,1,True,5934
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,time,1:00,1:00,11:00,False,5934
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,FormC,0,0,testing,NULL,ampm,AM,AM,PM,False,5934
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,testing,NULL,who,Tetrahedron,Tetrahedron group,Cube group,False,5084
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,testing,NULL,what,hotel*,hotel,hotel,True,5084
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,testing,NULL,where,Lemurland,Lemurland,Gibbonland,False,5084
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,testing,NULL,month,January*,January,January,True,5084
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,testing,NULL,day,1*,1,1,True,5084
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,testing,NULL,time,1:00,1:00,11:00,False,5084
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,FormC,1,0,testing,NULL,ampm,AM,AM,PM,False,5084
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,FormC,2,0,testing,NULL,who,Chartreuse,Chartreuse group,Violet group,False,6310
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,FormC,2,0,testing,NULL,what,dignitary-visiting,visiting dignitary,financial institution,False,6310
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,FormC,2,0,testing,NULL,where,Chiland,Chiland,Psiland,False,6310
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,FormC,2,0,testing,NULL,month,January,January,April,False,6310
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,FormC,2,0,testing,NULL,day,1,1,5,False,6310
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,FormC,2,0,testing,NULL,time,1:00,1:00,11:00,False,6310
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,FormC,2,0,testing,NULL,ampm,AM*,AM,AM,True,6310
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,Form,4,0,comments,NULL,comments,qweqwe
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,Form,4,0,comments,NULL,notes,Yes
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,Form,4,0,comments,NULL,_REACTION_TIME_,3156
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,Form,5,0,end.a,NULL,mental,5
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,Form,5,0,end.a,NULL,physical,5
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,Form,5,0,end.a,NULL,temp,5
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,Form,5,0,end.a,NULL,success,5
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,Form,5,0,end.a,NULL,perf,5
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,Form,5,0,end.a,NULL,stress,10
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,Form,5,0,end.a,NULL,preference,5
+1536082383,f41fe12e6a7a5a93328e525a8f6e864a,Form,5,0,end.a,NULL,_REACTION_TIME_,14814

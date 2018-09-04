@@ -3,7 +3,12 @@ tr.d0 td {
 	/*background-color: #d3d3d3; color: black; text-align:center;*/
 }
 tr.d1 td {
-	background-color: #ffffff; color: black; text-align:center;
+	/*background-color: #ffffff; color: black; text-align:center;*/
+}
+table.tlx {
+	table-layout:fixed;
+	width:880px;
+	/*background-color:#dddddd;*/
 }
 .desc {
 	text-align:left;
@@ -11,11 +16,12 @@ tr.d1 td {
 	}
 </style>
 
+<div style="width:900px;margin:0 auto;">
 <h1>One last thing</h1>
 <p>We would like to know how difficult you found these scenarios along six different dimensions. </p>
 
-
-<table style="table-layout:fixed;width:900px">
+<div class=ELICIT-response>
+<table class="tlx">
     <thead >
         <tr>
 			<th  style="width: 35%;">Mental Demand</th>
@@ -51,9 +57,11 @@ tr.d1 td {
 	<td>	<input type="radio" name="mental" value="21"></input>	</td>
 </tr>
 </table>
+</div>
 <br>
 
-<table style="table-layout:fixed;width:900px">
+<div class=ELICIT-response>
+<table class="tlx">
     <thead >
         <tr>
 			<th  style="width: 35%;">Physical Demand</th>
@@ -89,9 +97,11 @@ tr.d1 td {
 	<td>	<input type="radio" name="physical" value="21"></input>	</td>
 </tr>
 </table>
+</div>
 <br>
 
-<table style="table-layout:fixed;width:900px">
+<div class=ELICIT-response>
+<table class="tlx">
     <thead >
         <tr>
 			<th  style="width: 35%;">Temporal Demand</th>
@@ -127,9 +137,11 @@ tr.d1 td {
 	<td>	<input type="radio" name="temp" value="21"></input>	</td>
 </tr>
 </table>
+</div>
 <br>
 
-<table style="table-layout:fixed;width:900px">
+<div class=ELICIT-response>
+<table class="tlx">
     <thead >
         <tr>
 			<th  style="width: 35%;">Performance</th>
@@ -165,9 +177,11 @@ tr.d1 td {
 	<td>	<input type="radio" name="success" value="21"></input>	</td>
 </tr>
 </table>
+</div>
 <br>
 
-<table style="table-layout:fixed;width:900px">
+<div class=ELICIT-response>
+<table class="tlx">
     <thead >
         <tr>
 			<th  style="width: 35%;">Effort</th>
@@ -203,9 +217,11 @@ tr.d1 td {
 	<td>	<input type="radio" name="perf" value="21"></input>	</td>
 </tr>
 </table>
+</div>
 <br>
 
-<table style="table-layout:fixed;width:900px">
+<div class=ELICIT-response>
+<table class="tlx">
     <thead >
         <tr>
 			<th  style="width: 35%;">Frustration</th>
@@ -241,12 +257,15 @@ tr.d1 td {
 	<td>	<input type="radio" name="stress" value="21"></input>	</td>
 </tr>
 </table>
+</div>
 <br>
 
 <br>
 
-<p>And finally, we are interested in how helpful you think the text annotation was/would have been in this task. (Can ask same/switch, If I were given the choice, how likely would I be to choose annotation -- Very Low/Very High) </p>
-<table style="table-layout:fixed;width:900px">
+<!--<p>And finally, we are interested in how helpful you think the text annotation was/would have been in this task. (Can ask same/switch, If I were given the choice, how likely would I be to choose annotation -- Very Low/Very High) </p>-->
+<p>Finally, recall that in training you were shown examples of text both with and without automated markup. [maybe include reminder pictures here?]While you were only given the opportunity to solve full scenarios under one of these conditions, we are interested to know which condition you would overall prefer to work with.  </p>
+<div class=ELICIT-response>
+<table class="tlx">
     <thead >
 		<tr>
 			<th  style="width: 35%;">Preference</th>
@@ -262,7 +281,7 @@ tr.d1 td {
         </tr>
 	</thead>
 <tr class="d0">
-	<td class="desc"> 	If I were to complete this task again, I would prefer the text to appear this way. </td>
+	<td class="desc"> 	If given the choice, which version of the task would you prefer to work with? </td>
 	<td>	<input type="radio" name="preference" value="1" class="obligatory"></input>	</td>
 	<td>	<input type="radio" name="preference" value="2"></input>	</td>
 	<td>	<input type="radio" name="preference" value="3"></input>	</td>
@@ -288,5 +307,6 @@ tr.d1 td {
 	<td>	<input type="radio" name="preference" value="21"></input>	</td>
 </tr>
 </table>
+</div>
 <br>
-
+</div>
