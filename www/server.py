@@ -1757,13 +1757,14 @@ if CFG['SERVER_MODE'] != "cgi":
             'soundmanager2-jsmin.js',
             'soundmanager2_debug.swf',
 			
-			'train.orig.html',
-			'train.ann.html',
+			'train.html',
 			'train.ans.html',
 			
-			'scen1.orig.html',
-			'scen1.ann.html',
+			'scen1.html',
 			'scen1.ans.html',
+			
+			'scen4.html',
+			'scen4.ans.html',
 			
 			'clock.js'
         ]
