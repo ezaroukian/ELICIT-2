@@ -1,6 +1,6 @@
 //var shuffleSequence = seq("intro", sepWith("sep", seq("practice", rshuffle("s1", "s2"))), sepWith("sep", rshuffle("q1", "q2")));
-//var shuffleSequence = seq("inst",followEachWith("afterScen", "training"),"trust",followEachWith("afterScen", "testing"),"trust","comments");
-var shuffleSequence = seq(followEachWith("afterScen", "training"),"trust",followEachWith("afterScen", "testing"),"trust","comments");
+var shuffleSequence = seq("inst",followEachWith("afterScen", "training"),"trust",followEachWith("afterScen", "testing"),"trust","comments");
+//var shuffleSequence = seq(followEachWith("afterScen", "training"),"trust",followEachWith("afterScen", "testing"),"trust","comments");
 //var practiceItemTypes = ["practice"];
 
 var defaults = [
