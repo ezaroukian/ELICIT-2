@@ -70,7 +70,7 @@
   position: fixed;
   bottom: 20px; 
   width: 650px;
-  padding: 16px;
+  padding: 16px 16px 26px 16px;
   margin-left: -16px;
 }
 .ELICIT-scenario {

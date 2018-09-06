@@ -186,7 +186,7 @@ jqueryWidget: {
 
         if (this.continueMessage) {
             this.element.append($("<p>").append($("<a>").attr('href', '').text("\u2192 " + this.continueMessage)
-												.css({'position': 'fixed', 'bottom': '30',  'float': 'clear'})//Added for fixed behavior
+												.css({'position': 'fixed', 'bottom': '30',  'float': 'clear'/*, 'background-color': 'white', 'width': '650px', 'padding': '16px', 'margin-left': '-16px', 'opacity': '0.95'*/})//Added for fixed behavior
                                                 .addClass(ibex_controller_name_to_css_prefix("Message") + "continue-link")
                                                 .click(handler)));
         }

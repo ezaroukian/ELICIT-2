@@ -1,5 +1,6 @@
 //var shuffleSequence = seq("intro", sepWith("sep", seq("practice", rshuffle("s1", "s2"))), sepWith("sep", rshuffle("q1", "q2")));
-var shuffleSequence = seq(followEachWith("test-after", "testing"),"comments");
+//var shuffleSequence = seq("inst",followEachWith("afterScen", "training"),"trust",followEachWith("afterScen", "testing"),"trust","comments");
+var shuffleSequence = seq(followEachWith("afterScen", "training"),"trust",followEachWith("afterScen", "testing"),"trust","comments");
 //var practiceItemTypes = ["practice"];
 
 var defaults = [
@@ -25,19 +26,8 @@ var defaults = [
 ];
 
 var items = [
-//	["inst", "Message", {
-//		html: {include: "instructions.html"},
-//		hideProgressBar: false,
-//		countsForProgressBar: true
-//		}
-//	],
-//	["inst", "Form", {
-//			html: { include: "questionnaire.html"},
-//			countsForProgressBar: true,
-//			hideProgressBar: false	
-//		}
-//	],
-/* 	["inst", "Form", {
+
+ 	["inst", "Form", {
 			html: { include: "questionnaire.html"},
 			countsForProgressBar: true,
 			hideProgressBar: false	
@@ -48,15 +38,17 @@ var items = [
 		hideProgressBar: false,
 		countsForProgressBar: true
 		}
-	], */
+	],
 
-	["testing", "FormC", {html: {include: "train-p.html"}}],
-	["testing", "FormC", {html: {include: "train-m.html"}}],
+	["training", "FormC", {html: {include: "train-p.html"}}],
+	["training", "FormC", {html: {include: "train-m.html"}}],
 	["testing", "FormC", {html: {include: "scen4-m.html"}}],
 	["testing", "FormC", {html: {include: "scen1-m.html"}}],
-	["test-after", "Message", { html: {include: 'test.confirm.html'}} ],
+	["afterScen", "Message", { html: {include: 'test.confirm.html'}} ],
 	
-	['comments', 'Form', {'html': "<h1>How did you do it?</h1><div class='ELICIT-response'><p>Please describe any strategies you used to understand the scenario and answer the questions.</p> <textarea name='comments' rows='4' cols='50' class='obligatory'></textarea></div> <br><br> <div class='ELICIT-response'><p>Did you take any notes in the process of solving the task/scenarios?</p> <input type='radio' name='notes' id='yes' class='obligatory'  value='Yes'><label for='yes'>Yes</label><br> <input type='radio' name='notes' id='no' value='No'><label for='no'>No</label></div><br>"}],//Add labels, maybe make an include
+	["trust", "FormC", {html: {include: "trust.html"}, continueMessage: "Click here to continue"}],
+	
+	['comments', 'Form', {'html': "<h1>How did you do it?</h1><div class='ELICIT-response'><p style='font-weight:bold'>Please describe any strategies you used to understand the scenario and answer the questions.</p> <textarea name='comments' rows='4' cols='50' class='obligatory'></textarea></div> <br><br> <div class='ELICIT-response'><p style='font-weight:bold'>Did you take any notes in the process of solving the task/scenarios?</p> <input type='radio' name='notes' id='yes' class='obligatory'  value='Yes'><label for='yes'>Yes</label><br> <input type='radio' name='notes' id='no' value='No'><label for='no'>No</label></div><br>"}],//Add labels, maybe make an include
 
 ];
 
