@@ -1,17 +1,17 @@
 .who {
-    background-color: blue;
+    background-color: rgb(0,0,255);
 	color: white;
 }
 .what {
-    background-color: green;
+    background-color: rgb(0,144,0);
 	color: white;
 }
 .when {
-    background-color: brown;
+    background-color: rgb(210,0,0);
 	color: white;
 }
 .where {
-    background-color: red;
+    background-color: rgb(159,0,159);
 	color: white;
 }
 	
