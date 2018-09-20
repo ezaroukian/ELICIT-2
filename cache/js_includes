@@ -737,7 +737,7 @@ jqueryWidget: {
         this.finishedCallback = this.options._finishedCallback;
         this.utils = this.options._utils;
 
-        this.html = dget(this.options, "html");
+        this.html = dget(this.options, "html"); if(this.html!==undefined && this.html.include!==undefined){console.log(this.html.include);var htmlName=this.html.include;}else{var htmlName = "none"}
         this.continueOnReturn = dget(this.options, "continueOnReturn", false);
         this.continueMessage = dget(this.options, "continueMessage", "Click here to continue");
         this.checkedValue = dget(this.options, "checkedValue", "yes");
@@ -755,12 +755,12 @@ jqueryWidget: {
             dget(this.options, "obligatoryRadioErrorGenerator",
                  function (field) { return "You must select an option for \u2018" + field + "\u2019."; });
 		this.timeout = dget(this.options, "timeout", null);//to add timeout
+		this.continueFix = dget(this.options,"continueFix", null);//to add option for continue location
 		
 		var correctField = "Whether or not answer was correct (NULL if N/A)";//to add correct/incorrect
 		//--------------------------------------------------------------------------------------------
 
         var t = this;
-		
 
         function alertOrAddError(name, error) {
             var ae = $("label." + escape(t.errorCSSClass) + "[for=__ALL_FIELDS__]");
@@ -794,6 +794,10 @@ jqueryWidget: {
                 var inps = $(dom).find("input[type=text]");
                 var tas = $(dom).find("textarea");
                 for (var i = 0; i < tas.length; ++i) { inps.push(tas[i]); }
+				var ninps = $(dom).find("input[type=number]");//adding for number
+				//console.log("Ninps: "+ninps+", "+ninps.length);
+				if(ninps.length>0){inps.push(ninps);}
+
 
                 for (var i = 0; i < inps.length; ++i) {
                     var inp = $(inps[i]);
@@ -814,6 +818,7 @@ jqueryWidget: {
                     rlines.push([["Field name", csv_url_encode(inp.attr('name'))],
                                  ["Field value", csv_url_encode(inp.attr('value'))]]);
                 }
+				
 
                 var checks = $(dom).find("input[type=checkbox]");
                 for (var i = 0; i < checks.length; ++i) {
@@ -847,15 +852,19 @@ jqueryWidget: {
                         }
                     }
 					
-                    rlines.push([["Field name", drop.attr('name')],
+                    rlines.push([["Field name", drop.attr('name')],   
                                  ["Field value", drop.attr('value')],
 								 ["Field text", drop.find('option:selected').text()],
 								 ["Field correct text", drop.find("option[value*='*']").text()], 
 								 ["Field correct", drop.attr('value').slice(-1)=="*"],
 								// ["_REACTION_TIME_",  "time"]
-								 ["_REACTION_TIME_",  answerTime - t.creationTime]
+								// ["_REACTION_TIME_",  answerTime - t.creationTime]
+								 ["Html",htmlName]
 								 ]);
+
 				}
+				
+				
 				saveForLater=rlines;				
 				//End dropdown
                 // Sort by name.
@@ -892,10 +901,10 @@ jqueryWidget: {
                     }
                 }
 
-                //if (t.saveReactionTime) {
-                //    rlines.push([["Field name", "_REACTION_TIME_"],
-                //                 ["Field value", answerTime - t.creationTime]]);
-                //}
+                if (t.saveReactionTime) {
+                    rlines.push([["Field name", "_REACTION_TIME_"],
+                                 ["Field value", answerTime - t.creationTime]]);
+                }
                 t.finishedCallback(rlines);
             }
         }
@@ -911,11 +920,20 @@ jqueryWidget: {
 		
         this.element.append(dom);
 
-        if (this.continueMessage) {
-            this.element.append($("<p>").append($("<a>").attr('href', '').text("\u2192 " + this.continueMessage)
-												.css({'position': 'fixed', 'bottom': '30',  'float': 'clear'/*, 'background-color': 'white', 'width': '650px', 'padding': '16px', 'margin-left': '-16px', 'opacity': '0.95'*/})//Added for fixed behavior
+		//added for optional location
+        if (this.continueMessage) {//console.log(this.continueFix);
+			if (this.continueFix!=null || this.continueFix=="fixed") {
+				this.element.append($("<p>").append($("<a>").attr('href', '').text("\u2192 " + this.continueMessage)
+													.css({'position': 'fixed', 'bottom': '30',  'float': 'clear'/*, 'background-color': 'white', 'width': '650px', 'padding': '16px', 'margin-left': '-16px', 'opacity': '0.95'*/})//Added for fixed behavior
+													.addClass(ibex_controller_name_to_css_prefix("Message") + "continue-link")
+													.click(handler)));
+			}
+			else {
+				this.element.append($("<p>").append($("<a>").attr('href', '').text("\u2192 " + this.continueMessage)
+												.css('float', 'clear')
                                                 .addClass(ibex_controller_name_to_css_prefix("Message") + "continue-link")
                                                 .click(handler)));
+			}
         }
 
 
@@ -955,17 +973,18 @@ jqueryWidget: {
             }, this.timeout);
         }
     }
+	
 },
 
 properties: {
     obligatory: ["html"],
     countsForProgressBar: true,
+	timeout: 20*60,
     htmlDescription: function (opts) {
         return htmlCodeToDOM(opts.html);
     }
 }
 });
-
 
 /* This software is licensed under a BSD license; see the LICENSE file for details. */
 

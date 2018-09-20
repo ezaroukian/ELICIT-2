@@ -157,7 +157,7 @@ function stringEndsWith(k, s) {
     }
 }
 
-function custom_url_encode(s, specials) {
+function custom_url_encode(s, specials) {console.log(s);
     function is_special(c) {
         for (var k = 0; k < specials.length; ++k) {
             if (specials.charAt(k) == c.charAt(0))
