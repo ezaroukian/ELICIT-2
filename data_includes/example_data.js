@@ -1,7 +1,13 @@
 //var shuffleSequence = seq("intro", sepWith("sep", seq("practice", rshuffle("s1", "s2"))), sepWith("sep", rshuffle("q1", "q2")));
-var shuffleSequence = seq("inst",followEachWith("afterScen", "training"),"trust",followEachWith("afterScen", "testing"),"trust","comments");
+
+//var shuffleSequence = seq("setcounter","inst",followEachWith("afterScen", "training"),"trust",followEachWith("afterScen", randomize("testing")),"trust","comments");
+
+var shuffleSequence = seq("setcounter","inst","introTrainingP","trainingP","afterScen","introTrainingM","trainingM","afterScen","trust","introTest",followEachWith("afterScen", randomize("testing")),"trust","comments");
+
 //var shuffleSequence = seq(followEachWith("afterScen", "training"),"trust",followEachWith("afterScen", "testing"),"trust","comments");
 //var practiceItemTypes = ["practice"];
+
+//var  shuffleSequence = seq("setcounter","training","testing");//playing with randomization
 
 var defaults = [
  
@@ -21,11 +27,13 @@ var defaults = [
 		countsForProgressBar: true,
         continueOnReturn: false,
 		continueMessage:  "Click here to submit answers for this scenario",
-        saveReactionTime: true
+        saveReactionTime: true,
+		timeoutForm: 20*60*1000
     }
 ];
 
 var items = [
+	["setcounter", "__SetCounter__", { }], //Increment counter early for better "randomization"
 
  	["inst", "Form", {
 			html: { include: "questionnaire.html"},
@@ -40,15 +48,43 @@ var items = [
 		}
 	],
 
-	["training", "FormC", {html: {include: "train-p.html"}}],
-	["training", "FormC", {html: {include: "train-m.html"}}],
-	["testing", "FormC", {html: {include: "scen4-m.html"}}],
-	["testing", "FormC", {html: {include: "scen1-m.html"}}],
+	["trainingP", "FormC", {html: {include: "train-p.html"}}],
+	["trainingM", "FormC", {html: {include: "train-m.html"}}],
+//	["testing", "FormC", {html: {include: "scen4-m.html"}}],
+//	["testing", "FormC", {html: {include: "scen1-m.html"}}],
 	["afterScen", "Message", { html: {include: 'test.confirm.html'}} ],
 	
 	["trust", "FormC", {html: {include: "trust.html"}, continueMessage: "Click here to continue"}],
 	
 	['comments', 'Form', {'html': "<h1>How did you do it?</h1><div class='ELICIT-response'><p style='font-weight:bold'>Please describe any strategies you used to understand the scenario and answer the questions.</p> <textarea name='comments' rows='4' cols='50' class='obligatory'></textarea></div> <br><br> <div class='ELICIT-response'><p style='font-weight:bold'>Did you take any notes in the process of solving the task/scenarios?</p> <input type='radio' name='notes' id='yes' class='obligatory'  value='Yes'><label for='yes'>Yes</label><br> <input type='radio' name='notes' id='no' value='No'><label for='no'>No</label></div><br>"}],//Add labels, maybe make an include
+
+	[["testing","markup"], "FormC", {html: {include: "scen4-m.html"}}],
+	[["testing","markup"], "FormC", {html: {include: "scen1-m.html"}}],
+	[["testing","plain"], "FormC", {html: {include: "scen4-p.html"}}],
+	[["testing","plain"], "FormC", {html: {include: "scen1-p.html"}}],
+	
+	
+	["introTrainingP", "Message", {
+		html: "<p>On the next screen you will see a simple practice scenario <b>without markup</b>. Feel free to take as much time as you need to solve this scenario.</p>",
+		continueMessage: "Click here to begin the practice scenario"
+		}
+	],
+	["introTrainingM", "Message", {
+		html: "<p>On the next screen you will see another simple practice scenario, this time <b>with automatically-generated markup</b>. Feel free to take as much time as you need to solve this scenario.</p>",
+		continueMessage: "Click here to begin the practice scenario"
+		}
+	],
+	["introTest", "Message", {
+		html: {include: "introTest.html"},
+		continueMessage: "Click here to begin the first test scenario"
+		}
+	],
+	["betweenTest", "Message", {
+		html: "<p>Feel free to pause here and take a break.</p>",
+		continueMessage: "Click here to begin the second and final scenario"
+		}
+	]
+
 
 ];
 

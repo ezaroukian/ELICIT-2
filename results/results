@@ -307,3 +307,54 @@
 1536082383,f41fe12e6a7a5a93328e525a8f6e864a,Form,5,0,end.a,NULL,stress,10
 1536082383,f41fe12e6a7a5a93328e525a8f6e864a,Form,5,0,end.a,NULL,preference,5
 1536082383,f41fe12e6a7a5a93328e525a8f6e864a,Form,5,0,end.a,NULL,_REACTION_TIME_,14814
+#
+# Results on Wednesday September 19 2018 21:58:23 UTC.
+# USER AGENT: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0
+# Design number was non-random = 9
+#
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+# 10. Field text.
+# 11. Field correct text.
+# 12. Field correct.
+# 13. _REACTION_TIME_.
+1537394303,3e067ddb125f11c6433389c46a93642b,FormC,0,0,testing,m,who,Rose,Rose group,Silver group,False,33224
+1537394303,3e067ddb125f11c6433389c46a93642b,FormC,0,0,testing,m,what,courthouse,a courthouse,a secular school,False,33224
+1537394303,3e067ddb125f11c6433389c46a93642b,FormC,0,0,testing,m,where,Muland,Muland,Omicronland,False,33224
+1537394303,3e067ddb125f11c6433389c46a93642b,FormC,0,0,testing,m,month,January*,January,January,True,33224
+1537394303,3e067ddb125f11c6433389c46a93642b,FormC,0,0,testing,m,day,1*,1,1,True,33224
+1537394303,3e067ddb125f11c6433389c46a93642b,FormC,0,0,testing,m,time,2:00,2:00,9:00,False,33224
+1537394303,3e067ddb125f11c6433389c46a93642b,FormC,0,0,testing,m,ampm,AM*,AM,AM,True,33224
+1537394303,3e067ddb125f11c6433389c46a93642b,FormC,1,0,testing,m,who,Brown,Brown group,Violet group,False,5246
+1537394303,3e067ddb125f11c6433389c46a93642b,FormC,1,0,testing,m,what,dignitary-visiting,visiting dignitary,financial institution,False,5246
+1537394303,3e067ddb125f11c6433389c46a93642b,FormC,1,0,testing,m,where,Omegaland,Omegaland,Psiland,False,5246
+1537394303,3e067ddb125f11c6433389c46a93642b,FormC,1,0,testing,m,month,January,January,April,False,5246
+1537394303,3e067ddb125f11c6433389c46a93642b,FormC,1,0,testing,m,day,1,1,5,False,5246
+1537394303,3e067ddb125f11c6433389c46a93642b,FormC,1,0,testing,m,time,1:00,1:00,11:00,False,5246
+1537394303,3e067ddb125f11c6433389c46a93642b,FormC,1,0,testing,m,ampm,AM*,AM,AM,True,5246
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+1537394303,3e067ddb125f11c6433389c46a93642b,Form,4,0,end.b,NULL,mental,7
+1537394303,3e067ddb125f11c6433389c46a93642b,Form,4,0,end.b,NULL,physical,7
+1537394303,3e067ddb125f11c6433389c46a93642b,Form,4,0,end.b,NULL,temp,7
+1537394303,3e067ddb125f11c6433389c46a93642b,Form,4,0,end.b,NULL,success,7
+1537394303,3e067ddb125f11c6433389c46a93642b,Form,4,0,end.b,NULL,perf,7
+1537394303,3e067ddb125f11c6433389c46a93642b,Form,4,0,end.b,NULL,stress,7
+1537394303,3e067ddb125f11c6433389c46a93642b,Form,4,0,end.b,NULL,preference,3
+1537394303,3e067ddb125f11c6433389c46a93642b,Form,4,0,end.b,NULL,_REACTION_TIME_,10142

@@ -1,0 +1,20 @@
+<script>	
+console.log(condName); 
+var c = document.getElementById('currentCond'); 
+if(condName=='plain'){
+	txt=document.createTextNode('plain, without any automatically-generated markup');
+}
+else{
+	if(condName=='markup'){
+		txt=document.createTextNode('with automatically-generated markup');
+	}
+	else{
+		txt=document.createTextNode('ERROR');
+	}
+}
+c.appendChild(txt);
+</script>
+
+<p>The experiment will now begin, and you will be presented with two scenarios. Both scenarios will be presented <span id='currentCond'></span>.</p>
+
+<p>Remember to work as quickly as you can without sacrificing accuracy.</p>
