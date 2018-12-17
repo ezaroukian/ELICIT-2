@@ -4,14 +4,14 @@
  <p>Your responses will not affect your eligibility for this experiment.</p>
 
  <div class="ELICIT-response"> 
-<label><b>Do you consider English your first or primary language?</b></label> <label style="font-size:12px" class="error" for="Language"></label> <br>
+<label><b>Do you consider English your first or primary language?</b></label> <label style="font-size:12px;color:red" class="error" for="Language"></label> <br>
 <input type="radio" name="Language" id="L1" value="Yes" class="obligatory"> <label for="L1">Yes</label> <br>
 <input type="radio" name="Language" id="L2" value="No"> <label for="L2">No</label>
  </div> <br>
 
  
  <div class="ELICIT-response"> 
-<b>Please select your age range:</b> <label style="font-size:12px" class="error" for="Age"></label><br>
+<b>Please select your age range:</b> <label style="font-size:12px;color:red" class="error" for="Age"></label><br>
 <input type="radio" name="Age" id="A1" value="18-29" class="obligatory"> <label for="A1">18-29</label> <br>
 <input type="radio" name="Age" id="A2" value="30-49"> <label for="A2">30-49</label> <br>
 <input type="radio" name="Age" id="A3" value="50-64"> <label for="A3">50-64</label> <br>
@@ -20,7 +20,7 @@
 
  
  <div class="ELICIT-response"> 
-<b>Please select your gender:</b> <label style="font-size:12px" class="error" for="Gender"></label><br>
+<b>Please select your gender:</b> <label style="font-size:12px;color:red" class="error" for="Gender"></label><br>
 <input type="radio" name="Gender" id="G1" value="Female" class="obligatory"> <label for="G1">Female</label> <br>
 <input type="radio" name="Gender" id="G2" value="Male"> <label for="G2">Male</label> <br>
 <input type="radio" name="Gender" id="G3" value="Other/prefer not to say "> <label for="G3">Other/prefer not to say</label> 
@@ -28,7 +28,7 @@
 
 
 <div class="ELICIT-response"> 
-<b>Please select your highest level of educational attainment:</b> <label style="font-size:12px" class="error" for="Education"></label><br>
+<b>Please select your highest level of educational attainment:</b> <label style="font-size:12px;color:red" class="error" for="Education"></label><br>
 <input type="radio" name="Education" id="E1" value="Ed1" class="obligatory"> <label for="E1">High school graduate or less</label> <br>
 <input type="radio" name="Education" id="E2" value="Ed2"> <label for="E2">Some college</label> <br>
 <input type="radio" name="Education" id="E3" value="Ed3"> <label for="E3">College degree or more</label> 
@@ -36,7 +36,7 @@
 
 
 <div class="ELICIT-response"> 
-<b>Please select your occupation or field of study:</b> <label style="font-size:12px" class="error" for="Occupation"></label><br>
+<b>Please select your occupation or field of study:</b> <label style="font-size:12px;color:red" class="error" for="Occupation"></label><br>
 <input type="radio" name="Occupation" id="O1" value="O1" class="obligatory"> <label for="O1">Science and Technology</label> <br>
 <input type="radio" name="Occupation" id="O2" value="O2"> <label for="O2">Arts, Entertainment, and Media</label> <br>
 <input type="radio" name="Occupation" id="O3" value="O3"> <label for="O3">Education</label> <br>
@@ -55,7 +55,9 @@
 <!--<input type="text" class="obligatory" name="testingText"></input>-->
 
 <div class="ELICIT-response"> 
-<b>Please indicate how many different colors you see among the squares below.</b> <p>(Different colors should appear fairly distinct. If you are not sure whether two squares are the same color, they most likely are indeed the same. Do not count the gray background as a color.)</p>
+<b>Please indicate how many different colors you see among the squares below.</b> 
+<label style="font-size:12px;color:red" class="error" for="Color"></label><br>
+<p>(Different colors should appear fairly distinct. If you are not sure whether two squares are the same color, they most likely are indeed the same. Do not count the gray background as a color.)</p>
 <div style="display:table">
 <div style="display:table-row">
 <div class="ELICIT-who" style="display:table-cell;width:50px;height:50px;margin:1px;"> </div>
@@ -79,6 +81,6 @@
 <div class="ELICIT-where" style="display:table-cell;width:50px;height:50px;margin:1px;"> </div>
 <div class="ELICIT-what" style="display:table-cell;width:50px;height:50px;margin:1px;"> </div>
 </div>
-</div><label style="font-size:12px" class="error" for="Color"></label><br>
+</div>
 <input type="number" min="1" max="18" style="width:50px" name="Color" class="obligatory"></input>
 </div>

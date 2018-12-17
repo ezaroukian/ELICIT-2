@@ -40,7 +40,8 @@ var items = [
 			countsForProgressBar: true,
 			hideProgressBar: false, 
 			timeout: null,
-			continueFix: null
+			continueFix: null, 
+			continueMessage: "Click here to continue"
 		}
 	],
 	["inst", "FormC", {//Include RT
