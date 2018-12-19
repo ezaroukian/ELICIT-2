@@ -62,7 +62,7 @@ var items = [
 	["trust-pre", "FormC", {html: {include: "trust.html"}, continueMessage: "Click here to continue", timeout:null}],
 	
 	['comments', 'Form', {'html': "<h1>How did you do it?</h1><div class='ELICIT-response'><p style='font-weight:bold'>Please describe any strategies you used to understand the scenario and answer the questions.</p> <textarea name='comments' rows='4' cols='50' class='obligatory'></textarea></div> <br><br> <div class='ELICIT-response'><p style='font-weight:bold'>Did you take any notes in the process of solving the task/scenarios?</p> <input type='radio' name='notes' id='yes' class='obligatory'  value='Yes'><label for='yes'>Yes</label><br> <input type='radio' name='notes' id='no' value='No'><label for='no'>No</label></div><br>"}],//Add labels, maybe make an include
-	['comments', 'FormC', {html: {include: "pilot.html"}, continueMessage: "Click here submit your responses and complete the experiment"}],
+	['comments', 'FormC', {html: {include: "pilot.html"}, continueMessage: "Click here submit your responses and complete the experiment", timeout: null, hideProgressBar: false, countsForProgressBar: true,}],
 	
 	[["testing","markup"], "FormC", {html: {include: "scen4-m.html"}, timeout: 20*60*1000,continueFix: "fixed"}],
 	[["testing","markup"], "FormC", {html: {include: "scen1-m.html"}, timeout: 20*60*1000,continueFix: "fixed"}],
