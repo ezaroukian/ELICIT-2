@@ -1,16 +1,16 @@
-.who {
+.whoQ {
     background-color: rgb(0,0,255);
 	color: white;
 }
-.what {
+.whatQ {
     background-color: rgb(0,144,0);
 	color: white;
 }
-.when {
+.whenQ {
     background-color: rgb(210,0,0);
 	color: white;
 }
-.where {
+.whereQ {
     background-color: rgb(159,0,159);
 	color: white;
 }

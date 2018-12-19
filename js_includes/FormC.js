@@ -132,7 +132,8 @@ jqueryWidget: {
 								 ["Field correct", drop.attr('value').slice(-1)=="*"],
 								// ["_REACTION_TIME_",  "time"]
 								// ["_REACTION_TIME_",  answerTime - t.creationTime]
-								 ["Html",htmlName]
+								 ["Html",htmlName],
+								 ["Timeout","False"]
 								 ]);
 
 				}
@@ -237,7 +238,9 @@ jqueryWidget: {
 								 ["Field text", checkValue(drop.find('option:selected'))],
 								 ["Field correct text", drop.find("option[value*='*']").text()], 
 								 ["Field correct", drop.attr('value').slice(-1)=="*"],
-								 ["_REACTION_TIME_", "timed-out"]
+								 ["Html",htmlName],
+								 ["Timeout","True"]
+								 //["_REACTION_TIME_", "timed-out"]
 								 ]);								 
 				}
 				saveForLater=rlines;					

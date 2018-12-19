@@ -1,7 +1,7 @@
 import csv
 import os
 import time as tm
-import re
+#import re
 
 from HTMLParser import HTMLParser
 

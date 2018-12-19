@@ -43,19 +43,19 @@
 }
 
 
-.ELICIT-who {
+.ELICIT-whoQ {
     background-color: rgb(0,0,255);
 	color: white;
 }
-.ELICIT-what {
+.ELICIT-whatQ {
     background-color: rgb(0,144,0);
 	color: white;
 }
-.ELICIT-when {
+.ELICIT-whenQ {
     background-color: rgb(210,0,0);
 	color: white;
 }
-.ELICIT-where {
+.ELICIT-whereQ {
     background-color: rgb(159,0,159);
 	color: white;
 }
