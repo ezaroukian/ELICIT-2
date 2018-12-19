@@ -1,7 +1,7 @@
 
 function loadFiles(rootName, condition){
 	//rawgit properly serves raw github files; when using server.py replace with ""
-	var rawgit = "";//"https://rawgit.com/ezaroukian/ELICIT-2/master/www/"; //ending! Try jsDelivr, GitHub Pages, CodeSandbox, unpkg
+	var rawgit = "https://rawgit.com/ezaroukian/ELICIT-2/master/www/"; //ending! Try jsDelivr, GitHub Pages, CodeSandbox, unpkg
 	var scenarioFile = rawgit+rootName+".html";
 	var answerFile = rawgit+rootName+".ans.html";
 	
