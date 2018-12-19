@@ -1,7 +1,7 @@
 
 function loadFiles(rootName, condition){
 	//rawgit properly serves raw github files; when using server.py replace with ""
-	var rawgit = "https://rawgit.com/ezaroukian/ELICIT-2/master/www/";
+	var rawgit = "";//"https://rawgit.com/ezaroukian/ELICIT-2/master/www/"; //ending! Try jsDelivr, GitHub Pages, CodeSandbox, unpkg
 	var scenarioFile = rawgit+rootName+".html";
 	var answerFile = rawgit+rootName+".ans.html";
 	
@@ -20,10 +20,10 @@ function loadFiles(rootName, condition){
 		//console.log( data ); // Data returned
 		//remove markup if not markup condition
 		if(condition=="orig"){
-			$(".ELICIT-who").removeClass("ELICIT-who");
-			$(".ELICIT-what").removeClass("ELICIT-what");
-			$(".ELICIT-where").removeClass("ELICIT-where");
-			$(".ELICIT-when").removeClass("ELICIT-when");
+			$(".ELICIT-whoQ").removeClass("ELICIT-whoQ");
+			$(".ELICIT-whatQ").removeClass("ELICIT-whatQ");
+			$(".ELICIT-whereQ").removeClass("ELICIT-whereQ");
+			$(".ELICIT-whenQ").removeClass("ELICIT-whenQ");
 		}
 	}); 
 	
