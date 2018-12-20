@@ -162,6 +162,6 @@ else{
 	shuffleSequence = seq(shuffleSequence, "end.b");
 }
 //then add send results for all?
-shuffleSequence = seq(shuffleSequence, "end.all");
-	
+
 shuffleSequence = seq(shuffleSequence, "pilot");
+shuffleSequence = seq(shuffleSequence, "end.all");
