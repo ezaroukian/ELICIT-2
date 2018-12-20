@@ -1,3 +1,4 @@
+var manualSendResults = true;
 //var shuffleSequence = seq("intro", sepWith("sep", seq("practice", rshuffle("s1", "s2"))), sepWith("sep", rshuffle("q1", "q2")));
 
 //var shuffleSequence = seq("setcounter","inst",followEachWith("afterScen", "training"),"trust",followEachWith("afterScen", randomize("testing")),"trust","comments");
@@ -92,7 +93,12 @@ var items = [
 		html: "<p>Feel free to pause here and take a break.</p>",
 		continueMessage: "Click here to begin the second and final scenario"
 		}
-	]
+	], 
+	["end.all", "__SendResults__", { }],
+	["end.all", "Message", { html: { include: "code.html" },
+		            	transfer: null,
+				countsForProgressBar: false},
+    	]
 
 
 ];
