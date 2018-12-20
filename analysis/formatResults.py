@@ -94,20 +94,24 @@ def makeResFile(filename):
                             if r[6] != "NULL":
                                 cond = r[6].upper()
                         #Response data
-                        elif r[7] in ["who", "what", "where", "month", "day", "time", "ampm", "_REACTION_TIME_", "comments"]: 
+                        elif r[7] in ["who", "what", "where", "month", "day", "time", "ampm", "_REACTION_TIME_", "comments"]:
+                            #print len(r)
+                            if r[8] == "":
+                                r[8] = "NR"
                             exec('{VAR} = {VALUE}'.format(VAR = r[7], VALUE = repr(r[8])))
+                            #print "r[7]", r[7], "r[8]", r[8], "r[9]", r[9]
                             if  r[7] == "_REACTION_TIME_": #"comments" or r[7] == "preference"
                                writeRow=True
-                               print r[5], "RT"
+                               #print r[5], "RT"
 
                                                     
                         itemLabel = r[5].split(".")
                         if len(itemLabel)==1: # inst, afterScen, trust-pre, introTest, testing, afterScen, betweenTest, trust-post, comments
                             qType = itemLabel[0]
-                            
+                            #print qType, r[8]
                             if qType=="testing":
-                                if len(r)>9:
-                                    print qType, r[7], itemLabel
+                                if len(r)>9 and r[7]!= "_REACTION_TIME_":#because length seems weird...
+                                    #print qType, r[12]
                                     scen=r[12][4:5]#"NA"
                                     cond = r[6].upper()
                                 if r[7]=="_REACTION_TIME_":
@@ -125,9 +129,9 @@ def makeResFile(filename):
                             comments=""
                         else:
                             #mental=physical=temp=success=perf=stress=preference = ""
-                            order = itemLabel[0]
-                            cond = itemLabel[1]
-                            scen = itemLabel[2]
+                            #order = itemLabel[0]
+                            #cond = itemLabel[1]
+                            #scen = itemLabel[2]
                             #Comments
                             if scen == "comments":
                                 qType = "comments"

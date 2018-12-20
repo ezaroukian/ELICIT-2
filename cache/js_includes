@@ -972,6 +972,11 @@ jqueryWidget: {
 				}
 				saveForLater=rlines;					
 				/////
+				
+                if (t.saveReactionTime) {
+                    rlines.push([["Field name", "_REACTION_TIME_"],
+                                 ["Field value", answerTime - t.creationTime]]);
+                }
                 t.finishedCallback(rlines);//handleClick(dom) for rlines?        ///////
             }, this.timeout);
         }
