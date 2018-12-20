@@ -1,0 +1,812 @@
+#
+# Results on Thursday December 20 2018 17:36:06 UTC.
+# USER AGENT: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101 Firefox/60.0
+# Design number was non-random = 291
+#
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+1545327367,56c93a3c3803534466f9155054bad062,FormC,1,0,inst,NULL,other_reason,
+1545327367,56c93a3c3803534466f9155054bad062,FormC,1,0,inst,NULL,Color,5
+1545327367,56c93a3c3803534466f9155054bad062,FormC,1,0,inst,NULL,Language,Yes
+1545327367,56c93a3c3803534466f9155054bad062,FormC,1,0,inst,NULL,Age,30-49
+1545327367,56c93a3c3803534466f9155054bad062,FormC,1,0,inst,NULL,Gender,Other/prefer not to say 
+1545327367,56c93a3c3803534466f9155054bad062,FormC,1,0,inst,NULL,Education,Ed2
+1545327367,56c93a3c3803534466f9155054bad062,FormC,1,0,inst,NULL,Occupation,O3
+1545327367,56c93a3c3803534466f9155054bad062,FormC,1,0,inst,NULL,_REACTION_TIME_,18131
+1545327367,56c93a3c3803534466f9155054bad062,FormC,2,0,inst,NULL,_REACTION_TIME_,1224
+1545327367,56c93a3c3803534466f9155054bad062,Form,15,0,introTraining.P,NULL,_REACTION_TIME_,1455
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+# 10. Field text.
+# 11. Field correct text.
+# 12. Field correct.
+# 13. Html.
+# 14. Timeout.
+1545327367,56c93a3c3803534466f9155054bad062,FormC,3,0,training.P,NULL,who,Tetrahedron,Tetrahedron group,Cube group,False,train-p.html,False
+1545327367,56c93a3c3803534466f9155054bad062,FormC,3,0,training.P,NULL,what,military-base,military base,hotel,False,train-p.html,False
+1545327367,56c93a3c3803534466f9155054bad062,FormC,3,0,training.P,NULL,where,Gibbonland*,Gibbonland,Gibbonland,True,train-p.html,False
+1545327367,56c93a3c3803534466f9155054bad062,FormC,3,0,training.P,NULL,month,January*,January,January,True,train-p.html,False
+1545327367,56c93a3c3803534466f9155054bad062,FormC,3,0,training.P,NULL,day,1*,1,1,True,train-p.html,False
+1545327367,56c93a3c3803534466f9155054bad062,FormC,3,0,training.P,NULL,time,1:00,1:00,11:00,False,train-p.html,False
+1545327367,56c93a3c3803534466f9155054bad062,FormC,3,0,training.P,NULL,ampm,AM,AM,PM,False,train-p.html,False
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+1545327367,56c93a3c3803534466f9155054bad062,FormC,3,0,training.P,NULL,_REACTION_TIME_,13305
+1545327367,56c93a3c3803534466f9155054bad062,Form,5,0,afterScen,NULL,_REACTION_TIME_,2651
+1545327367,56c93a3c3803534466f9155054bad062,Form,16,0,introTraining.M,NULL,_REACTION_TIME_,1254
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+# 10. Field text.
+# 11. Field correct text.
+# 12. Field correct.
+# 13. Html.
+# 14. Timeout.
+1545327367,56c93a3c3803534466f9155054bad062,FormC,4,0,training.M,NULL,who,Tetrahedron*,Tetrahedron group,Tetrahedron group,True,train-m.html,False
+1545327367,56c93a3c3803534466f9155054bad062,FormC,4,0,training.M,NULL,what,hotel,hotel,military base,False,train-m.html,False
+1545327367,56c93a3c3803534466f9155054bad062,FormC,4,0,training.M,NULL,where,Lemurland*,Lemurland,Lemurland,True,train-m.html,False
+1545327367,56c93a3c3803534466f9155054bad062,FormC,4,0,training.M,NULL,month,January,January,March,False,train-m.html,False
+1545327367,56c93a3c3803534466f9155054bad062,FormC,4,0,training.M,NULL,day,1*,1,1,True,train-m.html,False
+1545327367,56c93a3c3803534466f9155054bad062,FormC,4,0,training.M,NULL,time,1:00,1:00,3:00,False,train-m.html,False
+1545327367,56c93a3c3803534466f9155054bad062,FormC,4,0,training.M,NULL,ampm,PM,PM,AM,False,train-m.html,False
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+1545327367,56c93a3c3803534466f9155054bad062,FormC,4,0,training.M,NULL,_REACTION_TIME_,5675
+1545327367,56c93a3c3803534466f9155054bad062,Form,5,0,afterScen,NULL,_REACTION_TIME_,6367
+1545327367,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,1,1
+1545327367,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,2,1
+1545327367,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,3,1
+1545327367,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,4,1
+1545327367,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,5,1
+1545327367,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,6,1
+1545327367,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,7,1
+1545327367,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,8,1
+1545327367,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,9,1
+1545327367,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,10,1
+1545327367,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,11,1
+1545327367,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,12,1
+1545327367,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,_REACTION_TIME_,9939
+1545327367,56c93a3c3803534466f9155054bad062,Form,17,0,introTest,NULL,_REACTION_TIME_,1005
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+# 10. Field text.
+# 11. Field correct text.
+# 12. Field correct.
+# 13. Html.
+# 14. Timeout.
+1545327367,56c93a3c3803534466f9155054bad062,FormC,9,0,testing,m,who,Silver*,Silver group,Silver group,True,scen4-m.html,False
+1545327367,56c93a3c3803534466f9155054bad062,FormC,9,0,testing,m,what,secular-school*,a secular school,a secular school,True,scen4-m.html,False
+1545327367,56c93a3c3803534466f9155054bad062,FormC,9,0,testing,m,where,Omicronland*,Omicronland,Omicronland,True,scen4-m.html,False
+1545327367,56c93a3c3803534466f9155054bad062,FormC,9,0,testing,m,month,January*,January,January,True,scen4-m.html,False
+1545327367,56c93a3c3803534466f9155054bad062,FormC,9,0,testing,m,day,1*,1,1,True,scen4-m.html,False
+1545327367,56c93a3c3803534466f9155054bad062,FormC,9,0,testing,m,time,9:00*,9:00,9:00,True,scen4-m.html,False
+1545327367,56c93a3c3803534466f9155054bad062,FormC,9,0,testing,m,ampm,AM*,AM,AM,True,scen4-m.html,False
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+1545327367,56c93a3c3803534466f9155054bad062,FormC,9,0,testing,m,_REACTION_TIME_,33311
+1545327367,56c93a3c3803534466f9155054bad062,Form,5,0,afterScen,NULL,_REACTION_TIME_,1843
+1545327367,56c93a3c3803534466f9155054bad062,Form,18,0,betweenTest,NULL,_REACTION_TIME_,918
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+# 10. Field text.
+# 11. Field correct text.
+# 12. Field correct.
+# 13. Html.
+# 14. Timeout.
+1545327367,56c93a3c3803534466f9155054bad062,FormC,10,0,testing,m,who,Violet*,Violet group,Violet group,True,scen1-m.html,False
+1545327367,56c93a3c3803534466f9155054bad062,FormC,10,0,testing,m,what,financial-institution*,financial institution,financial institution,True,scen1-m.html,False
+1545327367,56c93a3c3803534466f9155054bad062,FormC,10,0,testing,m,where,Psiland*,Psiland,Psiland,True,scen1-m.html,False
+1545327367,56c93a3c3803534466f9155054bad062,FormC,10,0,testing,m,month,April*,April,April,True,scen1-m.html,False
+1545327367,56c93a3c3803534466f9155054bad062,FormC,10,0,testing,m,day,5*,5,5,True,scen1-m.html,False
+1545327367,56c93a3c3803534466f9155054bad062,FormC,10,0,testing,m,time,11:00*,11:00,11:00,True,scen1-m.html,False
+1545327367,56c93a3c3803534466f9155054bad062,FormC,10,0,testing,m,ampm,AM*,AM,AM,True,scen1-m.html,False
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+1545327367,56c93a3c3803534466f9155054bad062,FormC,10,0,testing,m,_REACTION_TIME_,21101
+1545327367,56c93a3c3803534466f9155054bad062,Form,5,0,afterScen,NULL,_REACTION_TIME_,1402
+1545327367,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,1,2
+1545327367,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,2,1
+1545327367,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,3,2
+1545327367,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,4,3
+1545327367,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,5,2
+1545327367,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,6,3
+1545327367,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,7,2
+1545327367,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,8,2
+1545327367,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,9,2
+1545327367,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,10,3
+1545327367,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,11,3
+1545327367,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,12,3
+1545327367,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,_REACTION_TIME_,10178
+1545327367,56c93a3c3803534466f9155054bad062,Form,7,0,comments,NULL,comments,Description here.
+1545327367,56c93a3c3803534466f9155054bad062,Form,7,0,comments,NULL,notes,No
+1545327367,56c93a3c3803534466f9155054bad062,Form,7,0,comments,NULL,_REACTION_TIME_,15472
+1545327367,56c93a3c3803534466f9155054bad062,Form,19,0,end.b,NULL,mental,9
+1545327367,56c93a3c3803534466f9155054bad062,Form,19,0,end.b,NULL,physical,8
+1545327367,56c93a3c3803534466f9155054bad062,Form,19,0,end.b,NULL,temp,7
+1545327367,56c93a3c3803534466f9155054bad062,Form,19,0,end.b,NULL,success,6
+1545327367,56c93a3c3803534466f9155054bad062,Form,19,0,end.b,NULL,perf,5
+1545327367,56c93a3c3803534466f9155054bad062,Form,19,0,end.b,NULL,stress,4
+1545327367,56c93a3c3803534466f9155054bad062,Form,19,0,end.b,NULL,preference,3
+1545327367,56c93a3c3803534466f9155054bad062,Form,19,0,end.b,NULL,_REACTION_TIME_,9454
+1545327367,56c93a3c3803534466f9155054bad062,FormC,8,0,pilot,NULL,pilotQ1,Ladida
+1545327367,56c93a3c3803534466f9155054bad062,FormC,8,0,pilot,NULL,_REACTION_TIME_,21162
+#
+# Results on Thursday December 20 2018 18:06:31 UTC.
+# USER AGENT: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101 Firefox/60.0
+# Design number was non-random = 292
+#
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,1,0,inst,NULL,other_reason,
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,1,0,inst,NULL,Color,4
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,1,0,inst,NULL,Language,Yes
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,1,0,inst,NULL,Age,50-64
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,1,0,inst,NULL,Gender,Female
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,1,0,inst,NULL,Education,Ed1
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,1,0,inst,NULL,Occupation,O3
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,1,0,inst,NULL,_REACTION_TIME_,21218
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,2,0,inst,NULL,_REACTION_TIME_,4932
+1545329192,ca9710f2eefd1210073ce9c0230029b5,Form,15,0,introTraining.P,NULL,_REACTION_TIME_,1473
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+# 10. Field text.
+# 11. Field correct text.
+# 12. Field correct.
+# 13. Html.
+# 14. Timeout.
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,3,0,training.P,NULL,who,Cube*,Cube group,Cube group,True,train-p.html,False
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,3,0,training.P,NULL,what,military-base,military base,hotel,False,train-p.html,False
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,3,0,training.P,NULL,where,Gibbonland*,Gibbonland,Gibbonland,True,train-p.html,False
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,3,0,training.P,NULL,month,August,August,January,False,train-p.html,False
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,3,0,training.P,NULL,day,18,18,1,False,train-p.html,False
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,3,0,training.P,NULL,time,8:00,8:00,11:00,False,train-p.html,False
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,3,0,training.P,NULL,ampm,PM*,PM,PM,True,train-p.html,False
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,3,0,training.P,NULL,_REACTION_TIME_,64933
+1545329192,ca9710f2eefd1210073ce9c0230029b5,Form,5,0,afterScen,NULL,_REACTION_TIME_,4004
+1545329192,ca9710f2eefd1210073ce9c0230029b5,Form,16,0,introTraining.M,NULL,_REACTION_TIME_,1128
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+# 10. Field text.
+# 11. Field correct text.
+# 12. Field correct.
+# 13. Html.
+# 14. Timeout.
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,4,0,training.M,NULL,who,Tetrahedron*,Tetrahedron group,Tetrahedron group,True,train-m.html,False
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,4,0,training.M,NULL,what,military-base*,military base,military base,True,train-m.html,False
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,4,0,training.M,NULL,where,Gibbonland,Gibbonland,Lemurland,False,train-m.html,False
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,4,0,training.M,NULL,month,November,November,March,False,train-m.html,False
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,4,0,training.M,NULL,day,18,18,1,False,train-m.html,False
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,4,0,training.M,NULL,time,11:00,11:00,3:00,False,train-m.html,False
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,4,0,training.M,NULL,ampm,PM,PM,AM,False,train-m.html,False
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,4,0,training.M,NULL,_REACTION_TIME_,9969
+1545329192,ca9710f2eefd1210073ce9c0230029b5,Form,5,0,afterScen,NULL,_REACTION_TIME_,927
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,6,0,trust-pre,NULL,1,4
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,6,0,trust-pre,NULL,2,3
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,6,0,trust-pre,NULL,3,2
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,6,0,trust-pre,NULL,4,3
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,6,0,trust-pre,NULL,5,4
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,6,0,trust-pre,NULL,6,5
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,6,0,trust-pre,NULL,7,6
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,6,0,trust-pre,NULL,8,5
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,6,0,trust-pre,NULL,9,5
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,6,0,trust-pre,NULL,10,4
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,6,0,trust-pre,NULL,11,2
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,6,0,trust-pre,NULL,12,3
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,6,0,trust-pre,NULL,_REACTION_TIME_,426200
+1545329192,ca9710f2eefd1210073ce9c0230029b5,Form,17,0,introTest,NULL,_REACTION_TIME_,1094
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+# 10. Field text.
+# 11. Field correct text.
+# 12. Field correct.
+# 13. Html.
+# 14. Timeout.
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,12,0,testing,p,who,Silver*,Silver group,Silver group,True,scen4-p.html,False
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,12,0,testing,p,what,courthouse,a courthouse,a secular school,False,scen4-p.html,False
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,12,0,testing,p,where,Muland,Muland,Omicronland,False,scen4-p.html,False
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,12,0,testing,p,month,February,February,January,False,scen4-p.html,False
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,12,0,testing,p,day,1*,1,1,True,scen4-p.html,False
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,12,0,testing,p,time,2:00,2:00,9:00,False,scen4-p.html,False
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,12,0,testing,p,ampm,PM,PM,AM,False,scen4-p.html,False
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,12,0,testing,p,_REACTION_TIME_,7020
+1545329192,ca9710f2eefd1210073ce9c0230029b5,Form,5,0,afterScen,NULL,_REACTION_TIME_,1759
+1545329192,ca9710f2eefd1210073ce9c0230029b5,Form,18,0,betweenTest,NULL,_REACTION_TIME_,1299
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+# 10. Field text.
+# 11. Field correct text.
+# 12. Field correct.
+# 13. Html.
+# 14. Timeout.
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,13,0,testing,p,who,Purple,Purple group,Violet group,False,scen1-p.html,True
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,13,0,testing,p,what,, &lt;no response&gt;,financial institution,False,scen1-p.html,True
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,13,0,testing,p,where,, &lt;no response&gt;,Psiland,False,scen1-p.html,True
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,13,0,testing,p,month,April*,April,April,True,scen1-p.html,True
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,13,0,testing,p,day,, &lt;no response&gt;,5,False,scen1-p.html,True
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,13,0,testing,p,time,, &lt;no response&gt;,11:00,False,scen1-p.html,True
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,13,0,testing,p,ampm,PM,PM,AM,False,scen1-p.html,True
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,13,0,testing,p,_REACTION_TIME_,1200198
+1545329192,ca9710f2eefd1210073ce9c0230029b5,Form,5,0,afterScen,NULL,_REACTION_TIME_,9243
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,14,0,trust-post,p,1,3
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,14,0,trust-post,p,2,4
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,14,0,trust-post,p,3,4
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,14,0,trust-post,p,4,4
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,14,0,trust-post,p,5,5
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,14,0,trust-post,p,6,5
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,14,0,trust-post,p,7,5
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,14,0,trust-post,p,8,4
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,14,0,trust-post,p,9,4
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,14,0,trust-post,p,10,4
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,14,0,trust-post,p,11,5
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,14,0,trust-post,p,12,5
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,14,0,trust-post,p,_REACTION_TIME_,9768
+1545329192,ca9710f2eefd1210073ce9c0230029b5,Form,7,0,comments,NULL,comments,Strategies
+1545329192,ca9710f2eefd1210073ce9c0230029b5,Form,7,0,comments,NULL,notes,No
+1545329192,ca9710f2eefd1210073ce9c0230029b5,Form,7,0,comments,NULL,_REACTION_TIME_,7452
+1545329192,ca9710f2eefd1210073ce9c0230029b5,Form,19,0,end.b,NULL,mental,6
+1545329192,ca9710f2eefd1210073ce9c0230029b5,Form,19,0,end.b,NULL,physical,6
+1545329192,ca9710f2eefd1210073ce9c0230029b5,Form,19,0,end.b,NULL,temp,7
+1545329192,ca9710f2eefd1210073ce9c0230029b5,Form,19,0,end.b,NULL,success,7
+1545329192,ca9710f2eefd1210073ce9c0230029b5,Form,19,0,end.b,NULL,perf,8
+1545329192,ca9710f2eefd1210073ce9c0230029b5,Form,19,0,end.b,NULL,stress,5
+1545329192,ca9710f2eefd1210073ce9c0230029b5,Form,19,0,end.b,NULL,preference,11
+1545329192,ca9710f2eefd1210073ce9c0230029b5,Form,19,0,end.b,NULL,_REACTION_TIME_,9455
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,8,0,pilot,NULL,pilotQ1,This should be different next time
+1545329192,ca9710f2eefd1210073ce9c0230029b5,FormC,8,0,pilot,NULL,_REACTION_TIME_,22265
+#
+# Results on Thursday December 20 2018 18:09:23 UTC.
+# USER AGENT: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101 Firefox/60.0
+# Design number was non-random = 293
+#
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+1545329363,56c93a3c3803534466f9155054bad062,FormC,1,0,inst,NULL,other_reason,
+1545329363,56c93a3c3803534466f9155054bad062,FormC,1,0,inst,NULL,Color,3
+1545329363,56c93a3c3803534466f9155054bad062,FormC,1,0,inst,NULL,Language,Yes
+1545329363,56c93a3c3803534466f9155054bad062,FormC,1,0,inst,NULL,Age,65+
+1545329363,56c93a3c3803534466f9155054bad062,FormC,1,0,inst,NULL,Gender,Other/prefer not to say 
+1545329363,56c93a3c3803534466f9155054bad062,FormC,1,0,inst,NULL,Education,Ed2
+1545329363,56c93a3c3803534466f9155054bad062,FormC,1,0,inst,NULL,Occupation,O2
+1545329363,56c93a3c3803534466f9155054bad062,FormC,1,0,inst,NULL,_REACTION_TIME_,10314
+1545329363,56c93a3c3803534466f9155054bad062,FormC,2,0,inst,NULL,_REACTION_TIME_,1878
+1545329363,56c93a3c3803534466f9155054bad062,Form,15,0,introTraining.P,NULL,_REACTION_TIME_,1057
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+# 10. Field text.
+# 11. Field correct text.
+# 12. Field correct.
+# 13. Html.
+# 14. Timeout.
+1545329363,56c93a3c3803534466f9155054bad062,FormC,3,0,training.P,NULL,who,Cube*,Cube group,Cube group,True,train-p.html,False
+1545329363,56c93a3c3803534466f9155054bad062,FormC,3,0,training.P,NULL,what,hotel*,hotel,hotel,True,train-p.html,False
+1545329363,56c93a3c3803534466f9155054bad062,FormC,3,0,training.P,NULL,where,Lemurland,Lemurland,Gibbonland,False,train-p.html,False
+1545329363,56c93a3c3803534466f9155054bad062,FormC,3,0,training.P,NULL,month,February,February,January,False,train-p.html,False
+1545329363,56c93a3c3803534466f9155054bad062,FormC,3,0,training.P,NULL,day,2,2,1,False,train-p.html,False
+1545329363,56c93a3c3803534466f9155054bad062,FormC,3,0,training.P,NULL,time,3:00,3:00,11:00,False,train-p.html,False
+1545329363,56c93a3c3803534466f9155054bad062,FormC,3,0,training.P,NULL,ampm,AM,AM,PM,False,train-p.html,False
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+1545329363,56c93a3c3803534466f9155054bad062,FormC,3,0,training.P,NULL,_REACTION_TIME_,14580
+1545329363,56c93a3c3803534466f9155054bad062,Form,5,0,afterScen,NULL,_REACTION_TIME_,935
+1545329363,56c93a3c3803534466f9155054bad062,Form,16,0,introTraining.M,NULL,_REACTION_TIME_,2344
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+# 10. Field text.
+# 11. Field correct text.
+# 12. Field correct.
+# 13. Html.
+# 14. Timeout.
+1545329363,56c93a3c3803534466f9155054bad062,FormC,4,0,training.M,NULL,who,Tetrahedron*,Tetrahedron group,Tetrahedron group,True,train-m.html,False
+1545329363,56c93a3c3803534466f9155054bad062,FormC,4,0,training.M,NULL,what,hotel,hotel,military base,False,train-m.html,False
+1545329363,56c93a3c3803534466f9155054bad062,FormC,4,0,training.M,NULL,where,Lemurland*,Lemurland,Lemurland,True,train-m.html,False
+1545329363,56c93a3c3803534466f9155054bad062,FormC,4,0,training.M,NULL,month,January,January,March,False,train-m.html,False
+1545329363,56c93a3c3803534466f9155054bad062,FormC,4,0,training.M,NULL,day,1*,1,1,True,train-m.html,False
+1545329363,56c93a3c3803534466f9155054bad062,FormC,4,0,training.M,NULL,time,1:00,1:00,3:00,False,train-m.html,False
+1545329363,56c93a3c3803534466f9155054bad062,FormC,4,0,training.M,NULL,ampm,PM,PM,AM,False,train-m.html,False
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+1545329363,56c93a3c3803534466f9155054bad062,FormC,4,0,training.M,NULL,_REACTION_TIME_,7269
+1545329363,56c93a3c3803534466f9155054bad062,Form,5,0,afterScen,NULL,_REACTION_TIME_,1850
+1545329363,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,1,2
+1545329363,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,2,2
+1545329363,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,3,3
+1545329363,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,4,3
+1545329363,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,5,3
+1545329363,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,6,2
+1545329363,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,7,2
+1545329363,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,8,1
+1545329363,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,9,1
+1545329363,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,10,3
+1545329363,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,11,2
+1545329363,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,12,1
+1545329363,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,_REACTION_TIME_,16947
+1545329363,56c93a3c3803534466f9155054bad062,Form,17,0,introTest,NULL,_REACTION_TIME_,1225
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+# 10. Field text.
+# 11. Field correct text.
+# 12. Field correct.
+# 13. Html.
+# 14. Timeout.
+1545329363,56c93a3c3803534466f9155054bad062,FormC,9,0,testing,m,who,Silver*,Silver group,Silver group,True,scen4-m.html,False
+1545329363,56c93a3c3803534466f9155054bad062,FormC,9,0,testing,m,what,financial,a financial institution,a secular school,False,scen4-m.html,False
+1545329363,56c93a3c3803534466f9155054bad062,FormC,9,0,testing,m,where,Omicronland*,Omicronland,Omicronland,True,scen4-m.html,False
+1545329363,56c93a3c3803534466f9155054bad062,FormC,9,0,testing,m,month,January*,January,January,True,scen4-m.html,False
+1545329363,56c93a3c3803534466f9155054bad062,FormC,9,0,testing,m,day,1*,1,1,True,scen4-m.html,False
+1545329363,56c93a3c3803534466f9155054bad062,FormC,9,0,testing,m,time,9:00*,9:00,9:00,True,scen4-m.html,False
+1545329363,56c93a3c3803534466f9155054bad062,FormC,9,0,testing,m,ampm,AM*,AM,AM,True,scen4-m.html,False
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+1545329363,56c93a3c3803534466f9155054bad062,FormC,9,0,testing,m,_REACTION_TIME_,25321
+1545329363,56c93a3c3803534466f9155054bad062,Form,5,0,afterScen,NULL,_REACTION_TIME_,1699
+1545329363,56c93a3c3803534466f9155054bad062,Form,18,0,betweenTest,NULL,_REACTION_TIME_,1353
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+# 10. Field text.
+# 11. Field correct text.
+# 12. Field correct.
+# 13. Html.
+# 14. Timeout.
+1545329363,56c93a3c3803534466f9155054bad062,FormC,10,0,testing,m,who,Violet*,Violet group,Violet group,True,scen1-m.html,False
+1545329363,56c93a3c3803534466f9155054bad062,FormC,10,0,testing,m,what,financial-institution*,financial institution,financial institution,True,scen1-m.html,False
+1545329363,56c93a3c3803534466f9155054bad062,FormC,10,0,testing,m,where,Psiland*,Psiland,Psiland,True,scen1-m.html,False
+1545329363,56c93a3c3803534466f9155054bad062,FormC,10,0,testing,m,month,April*,April,April,True,scen1-m.html,False
+1545329363,56c93a3c3803534466f9155054bad062,FormC,10,0,testing,m,day,5*,5,5,True,scen1-m.html,False
+1545329363,56c93a3c3803534466f9155054bad062,FormC,10,0,testing,m,time,11:00*,11:00,11:00,True,scen1-m.html,False
+1545329363,56c93a3c3803534466f9155054bad062,FormC,10,0,testing,m,ampm,AM*,AM,AM,True,scen1-m.html,False
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+1545329363,56c93a3c3803534466f9155054bad062,FormC,10,0,testing,m,_REACTION_TIME_,28361
+1545329363,56c93a3c3803534466f9155054bad062,Form,5,0,afterScen,NULL,_REACTION_TIME_,1301
+1545329363,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,1,7
+1545329363,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,2,6
+1545329363,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,3,5
+1545329363,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,4,4
+1545329363,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,5,3
+1545329363,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,6,2
+1545329363,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,7,1
+1545329363,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,8,2
+1545329363,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,9,3
+1545329363,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,10,4
+1545329363,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,11,5
+1545329363,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,12,6
+1545329363,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,_REACTION_TIME_,14423
+1545329363,56c93a3c3803534466f9155054bad062,Form,7,0,comments,NULL,comments,Strategy strategy
+1545329363,56c93a3c3803534466f9155054bad062,Form,7,0,comments,NULL,notes,Yes
+1545329363,56c93a3c3803534466f9155054bad062,Form,7,0,comments,NULL,_REACTION_TIME_,12005
+1545329363,56c93a3c3803534466f9155054bad062,Form,19,0,end.a,NULL,mental,14
+1545329363,56c93a3c3803534466f9155054bad062,Form,19,0,end.a,NULL,physical,12
+1545329363,56c93a3c3803534466f9155054bad062,Form,19,0,end.a,NULL,temp,11
+1545329363,56c93a3c3803534466f9155054bad062,Form,19,0,end.a,NULL,success,12
+1545329363,56c93a3c3803534466f9155054bad062,Form,19,0,end.a,NULL,perf,10
+1545329363,56c93a3c3803534466f9155054bad062,Form,19,0,end.a,NULL,stress,12
+1545329363,56c93a3c3803534466f9155054bad062,Form,19,0,end.a,NULL,preference,9
+1545329363,56c93a3c3803534466f9155054bad062,Form,19,0,end.a,NULL,_REACTION_TIME_,12602
+1545329363,56c93a3c3803534466f9155054bad062,FormC,8,0,pilot,NULL,pilotQ1,Didn't change yet
+1545329363,56c93a3c3803534466f9155054bad062,FormC,8,0,pilot,NULL,_REACTION_TIME_,12650
+#
+# Results on Thursday December 20 2018 18:12:27 UTC.
+# USER AGENT: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101 Firefox/60.0
+# Design number was non-random = 291
+#
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+1545329548,56c93a3c3803534466f9155054bad062,FormC,1,0,inst,NULL,other_reason,
+1545329548,56c93a3c3803534466f9155054bad062,FormC,1,0,inst,NULL,Color,5
+1545329548,56c93a3c3803534466f9155054bad062,FormC,1,0,inst,NULL,Language,No
+1545329548,56c93a3c3803534466f9155054bad062,FormC,1,0,inst,NULL,Age,65+
+1545329548,56c93a3c3803534466f9155054bad062,FormC,1,0,inst,NULL,Gender,Other/prefer not to say 
+1545329548,56c93a3c3803534466f9155054bad062,FormC,1,0,inst,NULL,Education,Ed1
+1545329548,56c93a3c3803534466f9155054bad062,FormC,1,0,inst,NULL,Occupation,O6
+1545329548,56c93a3c3803534466f9155054bad062,FormC,1,0,inst,NULL,_REACTION_TIME_,8605
+1545329548,56c93a3c3803534466f9155054bad062,FormC,2,0,inst,NULL,_REACTION_TIME_,1159
+1545329548,56c93a3c3803534466f9155054bad062,Form,15,0,introTraining.P,NULL,_REACTION_TIME_,1322
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+# 10. Field text.
+# 11. Field correct text.
+# 12. Field correct.
+# 13. Html.
+# 14. Timeout.
+1545329548,56c93a3c3803534466f9155054bad062,FormC,3,0,training.P,NULL,who,Tetrahedron,Tetrahedron group,Cube group,False,train-p.html,False
+1545329548,56c93a3c3803534466f9155054bad062,FormC,3,0,training.P,NULL,what,hotel*,hotel,hotel,True,train-p.html,False
+1545329548,56c93a3c3803534466f9155054bad062,FormC,3,0,training.P,NULL,where,Gibbonland*,Gibbonland,Gibbonland,True,train-p.html,False
+1545329548,56c93a3c3803534466f9155054bad062,FormC,3,0,training.P,NULL,month,January*,January,January,True,train-p.html,False
+1545329548,56c93a3c3803534466f9155054bad062,FormC,3,0,training.P,NULL,day,2,2,1,False,train-p.html,False
+1545329548,56c93a3c3803534466f9155054bad062,FormC,3,0,training.P,NULL,time,1:00,1:00,11:00,False,train-p.html,False
+1545329548,56c93a3c3803534466f9155054bad062,FormC,3,0,training.P,NULL,ampm,AM,AM,PM,False,train-p.html,False
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+1545329548,56c93a3c3803534466f9155054bad062,FormC,3,0,training.P,NULL,_REACTION_TIME_,5335
+1545329548,56c93a3c3803534466f9155054bad062,Form,5,0,afterScen,NULL,_REACTION_TIME_,1546
+1545329548,56c93a3c3803534466f9155054bad062,Form,16,0,introTraining.M,NULL,_REACTION_TIME_,1175
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+# 10. Field text.
+# 11. Field correct text.
+# 12. Field correct.
+# 13. Html.
+# 14. Timeout.
+1545329548,56c93a3c3803534466f9155054bad062,FormC,4,0,training.M,NULL,who,Tetrahedron*,Tetrahedron group,Tetrahedron group,True,train-m.html,False
+1545329548,56c93a3c3803534466f9155054bad062,FormC,4,0,training.M,NULL,what,hotel,hotel,military base,False,train-m.html,False
+1545329548,56c93a3c3803534466f9155054bad062,FormC,4,0,training.M,NULL,where,Gibbonland,Gibbonland,Lemurland,False,train-m.html,False
+1545329548,56c93a3c3803534466f9155054bad062,FormC,4,0,training.M,NULL,month,February,February,March,False,train-m.html,False
+1545329548,56c93a3c3803534466f9155054bad062,FormC,4,0,training.M,NULL,day,1*,1,1,True,train-m.html,False
+1545329548,56c93a3c3803534466f9155054bad062,FormC,4,0,training.M,NULL,time,1:00,1:00,3:00,False,train-m.html,False
+1545329548,56c93a3c3803534466f9155054bad062,FormC,4,0,training.M,NULL,ampm,AM*,AM,AM,True,train-m.html,False
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+1545329548,56c93a3c3803534466f9155054bad062,FormC,4,0,training.M,NULL,_REACTION_TIME_,4382
+1545329548,56c93a3c3803534466f9155054bad062,Form,5,0,afterScen,NULL,_REACTION_TIME_,2144
+1545329548,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,1,2
+1545329548,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,2,1
+1545329548,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,3,3
+1545329548,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,4,4
+1545329548,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,5,3
+1545329548,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,6,2
+1545329548,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,7,5
+1545329548,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,8,4
+1545329548,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,9,3
+1545329548,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,10,2
+1545329548,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,11,1
+1545329548,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,12,2
+1545329548,56c93a3c3803534466f9155054bad062,FormC,6,0,trust-pre,NULL,_REACTION_TIME_,21840
+1545329548,56c93a3c3803534466f9155054bad062,Form,17,0,introTest,NULL,_REACTION_TIME_,1210
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+# 10. Field text.
+# 11. Field correct text.
+# 12. Field correct.
+# 13. Html.
+# 14. Timeout.
+1545329548,56c93a3c3803534466f9155054bad062,FormC,10,0,testing,m,who,Violet*,Violet group,Violet group,True,scen1-m.html,False
+1545329548,56c93a3c3803534466f9155054bad062,FormC,10,0,testing,m,what,financial-institution*,financial institution,financial institution,True,scen1-m.html,False
+1545329548,56c93a3c3803534466f9155054bad062,FormC,10,0,testing,m,where,Psiland*,Psiland,Psiland,True,scen1-m.html,False
+1545329548,56c93a3c3803534466f9155054bad062,FormC,10,0,testing,m,month,April*,April,April,True,scen1-m.html,False
+1545329548,56c93a3c3803534466f9155054bad062,FormC,10,0,testing,m,day,5*,5,5,True,scen1-m.html,False
+1545329548,56c93a3c3803534466f9155054bad062,FormC,10,0,testing,m,time,11:00*,11:00,11:00,True,scen1-m.html,False
+1545329548,56c93a3c3803534466f9155054bad062,FormC,10,0,testing,m,ampm,AM*,AM,AM,True,scen1-m.html,False
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+1545329548,56c93a3c3803534466f9155054bad062,FormC,10,0,testing,m,_REACTION_TIME_,28209
+1545329548,56c93a3c3803534466f9155054bad062,Form,5,0,afterScen,NULL,_REACTION_TIME_,3497
+1545329548,56c93a3c3803534466f9155054bad062,Form,18,0,betweenTest,NULL,_REACTION_TIME_,943
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+# 10. Field text.
+# 11. Field correct text.
+# 12. Field correct.
+# 13. Html.
+# 14. Timeout.
+1545329548,56c93a3c3803534466f9155054bad062,FormC,9,0,testing,m,who,Silver*,Silver group,Silver group,True,scen4-m.html,False
+1545329548,56c93a3c3803534466f9155054bad062,FormC,9,0,testing,m,what,secular-school*,a secular school,a secular school,True,scen4-m.html,False
+1545329548,56c93a3c3803534466f9155054bad062,FormC,9,0,testing,m,where,Omicronland*,Omicronland,Omicronland,True,scen4-m.html,False
+1545329548,56c93a3c3803534466f9155054bad062,FormC,9,0,testing,m,month,January*,January,January,True,scen4-m.html,False
+1545329548,56c93a3c3803534466f9155054bad062,FormC,9,0,testing,m,day,1*,1,1,True,scen4-m.html,False
+1545329548,56c93a3c3803534466f9155054bad062,FormC,9,0,testing,m,time,9:00*,9:00,9:00,True,scen4-m.html,False
+1545329548,56c93a3c3803534466f9155054bad062,FormC,9,0,testing,m,ampm,AM*,AM,AM,True,scen4-m.html,False
+# Columns below this comment are as follows:
+# 1. Time results were received.
+# 2. MD5 hash of participant's IP address.
+# 3. Controller name.
+# 4. Item number.
+# 5. Element number.
+# 6. Type.
+# 7. Group.
+# 8. Field name.
+# 9. Field value.
+1545329548,56c93a3c3803534466f9155054bad062,FormC,9,0,testing,m,_REACTION_TIME_,19899
+1545329548,56c93a3c3803534466f9155054bad062,Form,5,0,afterScen,NULL,_REACTION_TIME_,916
+1545329548,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,1,7
+1545329548,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,2,5
+1545329548,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,3,6
+1545329548,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,4,4
+1545329548,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,5,4
+1545329548,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,6,3
+1545329548,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,7,3
+1545329548,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,8,3
+1545329548,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,9,3
+1545329548,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,10,2
+1545329548,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,11,2
+1545329548,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,12,5
+1545329548,56c93a3c3803534466f9155054bad062,FormC,11,0,trust-post,m,_REACTION_TIME_,11461
+1545329548,56c93a3c3803534466f9155054bad062,Form,7,0,comments,NULL,comments,Strategy strategy strategy
+1545329548,56c93a3c3803534466f9155054bad062,Form,7,0,comments,NULL,notes,No
+1545329548,56c93a3c3803534466f9155054bad062,Form,7,0,comments,NULL,_REACTION_TIME_,14192
+1545329548,56c93a3c3803534466f9155054bad062,Form,19,0,end.b,NULL,mental,1
+1545329548,56c93a3c3803534466f9155054bad062,Form,19,0,end.b,NULL,physical,1
+1545329548,56c93a3c3803534466f9155054bad062,Form,19,0,end.b,NULL,temp,1
+1545329548,56c93a3c3803534466f9155054bad062,Form,19,0,end.b,NULL,success,1
+1545329548,56c93a3c3803534466f9155054bad062,Form,19,0,end.b,NULL,perf,1
+1545329548,56c93a3c3803534466f9155054bad062,Form,19,0,end.b,NULL,stress,1
+1545329548,56c93a3c3803534466f9155054bad062,Form,19,0,end.b,NULL,preference,1
+1545329548,56c93a3c3803534466f9155054bad062,Form,19,0,end.b,NULL,_REACTION_TIME_,10545
+1545329548,56c93a3c3803534466f9155054bad062,FormC,8,0,pilot,NULL,pilotQ1,It changed
+1545329548,56c93a3c3803534466f9155054bad062,FormC,8,0,pilot,NULL,_REACTION_TIME_,34604

@@ -1,0 +1,63 @@
+<h1>Thank you for your participation!</h1>
+
+
+<p>The experiment is complete.<p>
+
+<p>Your results will help us determine how best to automatically extract information from text and present it to decision makers.</p>
+<p>Your code is:</p>
+
+
+<p style="text-align: center;font-weight: bold;" id=uniqueID>If your code does not appear here, email erin.g.zaroukian.civ@mail.mil<p>
+
+
+<p>Be sure to enter this code on the Amazon Mechanical Turk site so that you can be rewarded for completing the HIT.</p>
+
+
+
+
+
+<script type="text/javascript">
+function uniqueMD5() {
+    // Time zone.
+    var s = "" + new Date().getTimezoneOffset() + ':';
+
+    // Plugins.
+    var plugins = [
+        "Java",
+        "QuickTime",
+        "DevalVR",
+        "Shockwave",
+        "Flash",
+        "Windows Media Player",
+        "Silverlight",
+        "VLC Player"
+    ];
+    for (var i = 0; i < plugins.length; ++i) {
+        var v = PluginDetect.getVersion(plugins[i]);
+        if (v) s += plugins[i] + ':' + v;
+    }
+
+    // Whether or not cookies are turned on.
+    createCookie("TEST", "TEST", 0.01); // Keep it for 0.01 days.
+    if (readCookie("TEST") == "TEST")
+        s += "C";
+
+    // Screen dimensions and color depth.
+    var width = screen.width ? screen.width : 1;
+    var height = screen.height ? screen.height : 1;
+    var colorDepth = screen.colorDepth ? screen.colorDepth : 1;
+    s += width + ':' + height + ':' + colorDepth;
+
+    return b64_md5(s);
+}
+
+var d = new Date();
+var t = d.getTime();
+var thou = t %10000;
+
+var uID = uniqueMD5();
+
+document.getElementById("uniqueID").innerHTML = "57"+uID.substring(0,12)+thou;
+
+//put somewhere that it will be sent to results - make a question or part of a form?
+ </script> 
