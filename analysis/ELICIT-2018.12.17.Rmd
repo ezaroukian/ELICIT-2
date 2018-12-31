@@ -51,7 +51,7 @@ multiplot <- function(..., plotlist=NULL, cols) {
 
 #setwd("M:/IBEX-experiments/ELICIT/analysis")
 setwd("C:/Users/erin.zaroukian/Desktop/ELICIT-2")
-data <- read.csv("results-formatted.csv")
+data <- read.csv("results-2018.12.21-formatted.csv")
 #data <- read.csv("results-20180108-formatted.csv")
 ```
 
@@ -66,7 +66,7 @@ dataPref <- data[data$qType=="end",]
 dataComms <- data[data$qType=="comments",]
 dt <- data.table(dataTest)
 dr <- data.table(dataTrust)
-dp <- data.table(dataPref)
+dq <- data.table(dataPref)
 dc <- data.table(dataComms)
 
 dt$whoCorrect = as.logical(dt$whoCorrect)
@@ -83,16 +83,16 @@ dt$gender = factor(dt$gender, levels=c("Female","Male","Other/prefer not to say"
 
 #Rename and relevel
 levels(dt$education) <- c("High school graduate or less", "Some college", "College degree or more")#To make sure all levels are there for later tables and rename
-levels(dt$occupation) <- c("Science and Technology", "Arts, Entertainment, and Media", "Education", "Legal", "Sales", "Food Preparation and Serving", "Office and Administrative Support", "Accounting and Finance", "Healthcare and Medical", "Industry and Manufacturing", "Law Enforcement", "Business Management", "")
+levels(dt$occupation) <- c("Science and Technology", "Arts, Entertainment, and Media", "Education", "Legal", "Sales", "Food Preparation and Serving", "Office and Administrative Support", "Accounting and Finance", "Healthcare and Medical", "Industry and Manufacturing", "Law Enforcement", "Business Management", "Other")
 dt$cond = revalue(dt$cond, c("M"="Markup", "P"="Plain"))
 dt$cond = relevel(dt$cond,"Plain")
 dt$cond=droplevels(dt$cond)
 
-#Assign 20 minutes to timeout (NA) cells
+#Assign 20 minutes to timeout (NA) cells - I think this is out of data, they now have an actual time
 dt[is.na(dt$responseTime),]$responseTime = 20
 
 #Melt into long form
-dt.m = melt(dt, id=c("worker","cond"), measure.vars = patterns("(Time$|Correct$)"))
+dt.m = melt(dt, id=c("worker","cond","order"), measure.vars = patterns("(Time$|Correct$)"))
 #Rename
 names(dt.m)[names(dt.m)=="cond"] <- "Condition"
 
@@ -140,11 +140,11 @@ setnames(ct.w.rt, "value", "Mean")
 #count
 avacc = dt.m %>%
   subset(variable!="responseTime") %>%
-  group_by(worker,Condition) %>%
+  group_by(worker,Condition,order) %>%
   summarise(Mean=mean(value), Count=sum(value)) #count is out of 14 here
 
 #avacc$Count = avacc$Mean*7 #If I want average count per scenario
-accTime = merge(avacc, dplyr::select(dt, worker, Condition=cond, Scenario=scenario, RT=responseTime))
+accTime = merge(avacc, dplyr::select(dt, worker, Condition=cond, Scenario=scenario, Order=order, RT=responseTime))
 #accTime$Block = as.factor(accTime$Block)
 accTime$Scenario = as.factor(accTime$Scenario) #accTime$Scenario = as.factor(substr(accTime$Scenario, 9,9))
 #Add column for which was seen first
@@ -170,7 +170,8 @@ accTime$Scenario = as.factor(accTime$Scenario) #accTime$Scenario = as.factor(sub
 #I should just stick to SE since I don't really know the count distribution
 ct.within = summarySE(data=accTime, measurevar = "Count", groupvars = c("Condition", "worker"))#can spit back up for RM
 mn.within = summarySEwithin(data=accTime, measurevar = "Mean", withinvars = c("Condition"), idvar = "worker")#Cond not within
-rt.within = summarySEwithin(data=accTime, measurevar = "RT", withinvars = c("Condition"), idvar = "worker")#Cond not within
+rt.within = summarySE(data=accTime, measurevar = "RT", groupvars = c("Condition"))#Cond not within
+
 
 #use gear > Chunk Output... for global setting on where plots appear
 ggplot(data=ct.within, aes(x=Condition, y=Count, fill=Condition)) +
@@ -319,8 +320,8 @@ dq.m = melt(dq, id=c("worker","cond"), measure.vars = c("mental","physical","tem
 ggplot(dq.m, aes(x=variable, y=value))+
   geom_bar(stat = "summary", fun.y = "mean") +
   ylim(0,21) + 
-  ylab("1=no markup, 21=markup") +
-  geom_hline(yintercept = 11) 
+  ylab("1=low, 21=high") +
+  geom_hline(yintercept = 11) + facet_wrap(~cond)
 
 ggplot(dq.m, aes(value))+
   geom_bar() +

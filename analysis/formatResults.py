@@ -114,6 +114,7 @@ def makeResFile(filename):
                                     #print qType, r[12]
                                     scen=r[12][4:5]#"NA"
                                     cond = r[6].upper()
+                                    cond1=cond
                                 if r[7]=="_REACTION_TIME_":
                                     order = orderTemp%2 + 1
                                     orderTemp += 1
@@ -123,7 +124,10 @@ def makeResFile(filename):
                         elif len(itemLabel)>1: # training.P/M, introTraining.P/M, end.a/b
                             order="NA"
                             cond=itemLabel[1]
-                            cond1=itemLabel[1]
+                            if itemLabel[0]=="end":
+                                cond = cond1
+                                print cond1
+
                             qType=itemLabel[0] #"questionnaire"
                             whoCorrect=whatCorrect=whereCorrect=timeCorrect=dayCorrect=monthCorrect=ampmCorrect = ""
                             comments=""
