@@ -1,0 +1,1174 @@
+---
+title: "ELICIT pipeline"
+author: "Erin Zaroukian"
+date: "December 12, 2017"
+output: html_document
+editor_options: 
+  chunk_output_type: inline
+---
+  
+##Generate an R-readable csv file with formatResults.py in the analysis folder.
+
+```{r echo=FALSE, message=FALSE}
+if (!require("pacman")) install.packages("pacman")  #Not working on enterprise, permissions?
+pacman::p_load(ggplot2,lme4,Rmisc,data.table,RColorBrewer,tidyr,dplyr)#with lmerTest, summary() will give p values, but it ruins AIC tables
+
+#knitr::opts_knit$set(root.dir = normalizePath(".."))
+
+#AICcmodavg
+#a couple functions
+
+#for plotting SE instead of SD
+se <-function(sample, na.rm=FALSE){
+  return(sd(sample, na.rm=na.rm)/sqrt(length(sample)))#remove NA from length?
+}
+#for plotting side-by-side (from the internet)
+multiplot <- function(..., plotlist=NULL, cols) {
+  require(grid)
+  
+  # Make a list from the ... arguments and plotlist
+  plots <- c(list(...), plotlist)
+  
+  numPlots = length(plots)
+  
+  # Make the panel
+  plotCols = cols                       # Number of columns of plots
+  plotRows = ceiling(numPlots/plotCols) # Number of rows needed, calculated from # of cols
+  
+  # Set up the page
+  grid.newpage()
+  pushViewport(viewport(layout = grid.layout(plotRows, plotCols)))
+  vplayout <- function(x, y)
+    viewport(layout.pos.row = x, layout.pos.col = y)
+  
+  # Make each plot, in the correct location
+  for (i in 1:numPlots) {
+    curRow = ceiling(i/plotCols)
+    curCol = (i-1) %% plotCols + 1
+    print(plots[[i]], vp = vplayout(curRow, curCol ))
+  }
+  
+}
+
+
+#setwd("M:/IBEX-experiments/ELICIT/analysis")
+#setwd("C:/Users/erin.zaroukian/Desktop/ELICIT-2")
+#setwd("C:/Users/ezaro/Desktop/Work/ELICIT-2") # root.dir
+data <- read.csv("results-2018.12.31-formatted.csv")
+#data <- read.csv("results-20180108-formatted.csv")
+```
+
+##Get the dataframe ready
+
+```{r echo=FALSE, message=FALSE}
+data <- as.data.frame(data)
+
+dataTest <- data[data$qType=="testing",]
+dataTrust <- data[data$qType=="trust-pre" | data$qType=="trust-post",]
+dataPref <- data[data$qType=="end",]
+dataComms <- data[data$qType=="comments",]
+dt <- data.table(dataTest)
+dr <- data.table(dataTrust)
+dq <- data.table(dataPref)
+dc <- data.table(dataComms)
+
+dt$whoCorrect = as.logical(dt$whoCorrect)
+dt$whatCorrect = as.logical(dt$whatCorrect)
+dt$whereCorrect = as.logical(dt$whereCorrect)
+dt$monthCorrect = as.logical(dt$monthCorrect)
+dt$dayCorrect = as.logical(dt$dayCorrect)
+dt$timeCorrect = as.logical(dt$timeCorrect)
+dt$ampmCorrect = as.logical(dt$ampmCorrect)
+dt$responseTime = dt$responseTime/(1000*60) #dt$responseTime = as.numeric(levels(dt$responseTime))[dt$responseTime]/(1000*60) #responseTime needs to be properly numerical, no timed-out (or make max?)
+dt$age = factor(dt$age, levels=c("18-29","30-49","50-64","65+"))#To make sure all levels are there for later tables
+dt$gender = factor(dt$gender, levels=c("Female","Male","Other/prefer not to say"))#To make sure all levels are there for later tables
+
+
+#Rename and relevel
+levels(dt$education) <- c("High school graduate or less", "Some college", "College degree or more")#To make sure all levels are there for later tables and rename
+levels(dt$occupation) <- c("Science and Technology", "Arts, Entertainment, and Media", "Education", "Legal", "Sales", "Food Preparation and Serving", "Office and Administrative Support", "Accounting and Finance", "Healthcare and Medical", "Industry and Manufacturing", "Law Enforcement", "Business Management", "Other")
+dt$cond = revalue(dt$cond, c("M"="Markup", "P"="Plain"))
+dt$cond = relevel(dt$cond,"Plain")
+dt$cond=droplevels(dt$cond)
+
+#Assign 20 minutes to timeout (NA) cells - I think this is out of data, they now have an actual time
+dt[is.na(dt$responseTime),]$responseTime = 20
+
+#Melt into long form
+dt.m = melt(dt, id=c("worker","cond","order"), measure.vars = patterns("(Time$|Correct$)"))
+#Rename
+names(dt.m)[names(dt.m)=="cond"] <- "Condition"
+
+#remove "correct"
+#dt.m$variable = sapply(dt.m$variable, function(x){substr(x, 1, nchar(as.character(x))-7)})
+dt.m$variable = sapply(dt.m$variable, function(x){sub("Correct","",x)})
+dt.m$variable = as.factor(dt.m$variable)
+
+c = summarySE(subset(dt.m, variable!="responseTime"), groupvars=c("Condition"), measurevar="value") 
+names(c)[names(c)=="value"] <- "Mean"
+c.w = summarySEwithin(subset(dt.m, variable!="responseTime"), measurevar = "value", withinvars = c("Condition"), idvar="worker")#How is this bigger than c?? Is it the bias correction? http://pcl.missouri.edu/sites/default/files/morey.2008.pdf
+setnames(c.w, "value", "Mean")
+
+ct = summarySE(subset(dt.m, variable!="responseTime"), groupvars=c("Condition","variable"), measurevar="value") #Yay!
+ct.w = summarySEwithin(subset(dt.m, variable!="responseTime"), measurevar="value", withinvars=c("Condition","variable"), idvar="worker" )
+
+setnames(ct, c("value","variable"), c("Mean","Question"))
+setnames(ct.w, c("value","variable"), c("Mean","Question"))
+
+
+ct.rt = summarySE(subset(dt.m, variable=="responseTime"), groupvars=c("Condition","variable"), measurevar="value") #Yay!
+ct.w.rt = summarySEwithin(subset(dt.m, variable=="responseTime"), measurevar="value", withinvars=c("Condition","variable"), idvar="worker" )
+
+setnames(ct.rt, "value", "Mean")
+setnames(ct.w.rt, "value", "Mean")
+
+# #Plot means
+# ggplot(data=ct.w.rt, aes(x=Condition, y=Mean, fill=Condition)) +
+#    geom_bar(stat="identity",position="dodge") +
+#    geom_errorbar(aes(ymin=Mean-ci, ymax=Mean+ci), width=.1, position=position_dodge(.9)) +
+#   ylab("Mean RT (minutes)") + xlab("") + theme_bw()
+# 
+# ggplot(data=c.w, aes(x=Condition, y=Mean, fill=Condition)) +
+#    geom_bar(stat="identity",position="dodge") +
+#    geom_errorbar(aes(ymin=Mean-ci, ymax=Mean+ci), width=.1, position=position_dodge(.9)) +
+#   ylab("Mean accuracy") + theme_bw()
+# 
+# ggplot(data=ct.w, aes(x=Question, y=Mean, fill=Condition)) +
+#    geom_bar(stat="identity",position="dodge") +
+#    geom_errorbar(aes(ymin=Mean-ci, ymax=Mean+ci), width=.1, position=position_dodge(.9)) +
+#   ylab("Mean accuracy") + theme_bw()
+```
+#Count data
+```{r}
+#count
+avacc = dt.m %>%
+  subset(variable!="responseTime") %>%
+  group_by(worker,Condition,order) %>%
+  summarise(Mean=mean(value), Count=sum(value)) #count is out of 14 here
+colnames(avacc)[colnames(avacc)=="order"] <- "Order"
+
+
+
+#avacc$Count = avacc$Mean*7 #If I want average count per scenario
+accTime = merge(avacc, dplyr::select(dt, worker, Condition=cond, Scenario=scenario, Order=order, RT=responseTime), by=c("worker", "Condition","Order"))
+accTime = subset(accTime, worker != "b3c149d4efe5ed61f083b644357f11c6--1546286120")#remove that one person with negative response time??
+#accTime$Block = as.factor(accTime$Block)
+accTime$Scenario = as.factor(accTime$Scenario) #accTime$Scenario = as.factor(substr(accTime$Scenario, 9,9))
+#Add column for which was seen first
+#accTime$first <- "blank"
+#for(r in 1:nrow(accTime)){
+#  if(r%%2==1){#for a person's first trial
+#    if(accTime$Block[r]==1 && accTime$Condition[r]=="markup"){
+#      accTime$first[r:(r+1)] = "markup"
+#    } 
+#    else if(accTime$Block[r]==1 && accTime$Condition[r]=="plain"){
+#      accTime$first[r:(r+1)] = "plain"
+#    } 
+#    else if(accTime$Block[r]==2 && accTime$Condition[r]=="markup"){
+#      accTime$first[r:(r+1)] = "plain"
+#    } 
+#    else if(accTime$Block[r]==2 && accTime$Condition[r]=="plain"){
+#      accTime$first[r:(r+1)] = "markup"
+#    } 
+#  }
+#}
+#accTime$first = relevel(as.factor(accTime$first),"plain")
+
+#I should just stick to SE since I don't really know the count distribution
+ct.within = summarySE(data=accTime, measurevar = "Count", groupvars = c("Condition"))#can spit back up for RM
+mn.within = summarySEwithin(data=accTime, measurevar = "Mean", withinvars = c("Condition"), idvar = "worker")#Cond not within
+rt.within = summarySE(data=accTime, measurevar = "RT", groupvars = c("Condition"))#Cond not within
+
+
+#use gear > Chunk Output... for global setting on where plots appear
+ggplot(data=ct.within, aes(x=Condition, y=Count, fill=Condition)) +
+   geom_bar(stat="identity",position="dodge") +
+   geom_errorbar(aes(ymin=Count-se, ymax=Count+se), width=.1, position=position_dodge(.9)) +
+  ylab("Mean accuracy count") + xlab("")+ theme_bw() +theme(legend.position="none")  + ylim(c(0,7))
+
+ggplot(data=mn.within, aes(x=Condition, y=Mean, fill=Condition)) +
+   geom_bar(stat="identity",position="dodge") +
+   geom_errorbar(aes(ymin=Mean-ci, ymax=Mean+ci), width=.1, position=position_dodge(.9)) +
+  ylab("Mean overall accuracy") + xlab("") + theme_bw() 
+
+ggplot(data=rt.within, aes(x=Condition, y=RT, fill=Condition)) +
+   geom_bar(stat="identity",position="dodge") +
+   geom_errorbar(aes(ymin=RT-se, ymax=RT+se), width=.1, position=position_dodge(.9)) +
+  ylab("Mean RT (minutes)") + theme_bw() +theme(legend.position="none") 
+
+```
+
+
+```{r}
+incoherent = c("595e712fbcad7f21a71cb83baf0110a6--1546280698",
+"fb7bf08e26b4e5d75c24bed7b9bb6db1--1546286543",
+"fb7bf08e26b4e5d75c24bed7b9bb6db1--1546286677",
+"dd4953380c465558aa2e0358ea6dbab4--1546288220",
+"495a220fa8b47c3fdefc539b6f68d5a6--1546295549",
+"2bee402f56034412faee3379a587f21f--1546283533",
+"79d29bd909748fd8ef7af76413907ce1--1546286100",
+"661585c956d4f150b515ac63e6fed134--1546280888",
+"079a12b652342a2794b72eb9a8354e0b--1546286345",
+"6995522f3b3e834bfb6d180260a4b2bd--1546286075",
+"801dc4f6507e5df7284599ccebf8ace7--1546284574",
+"c33193840c43eade5ce8a735c91e049e--1546281774",
+"3f208fc49bcbcf6b56535c75e22bcf91--1546281431",
+"953bcb6671fa9f1f53d629af93f26c54--1546284829",
+"f5727b67184fc6025ffcc0bb7112f9ac--1546280894",
+"71fc82c3074a55d8eca2003bad7745b7--1546281947",
+"f3fef3b3e183e6751bf037de4537b38b--1546283212",
+"d504237faeac66d4a153b1ec855a9960--1546284572",
+"953bcb6671fa9f1f53d629af93f26c54--1546285168",
+"3d9a5f16e6aa44f188f8deb43734ba25--1546284044",
+"6e6829f3077e64c1d1e02a7b0b239f64--1546286247",
+"1a459989dd45be88fb9b2d38361b4434--1546280571",
+"37185ad3795c7ac99f8fe65983207211--1546284277",
+"506bd02522b13436c2810ded27725f51--1546280747",
+"fdc4e0bbd2d782ac08147c83204ac789--1545913637",
+"ff14d46d033f4961360664ef8a97caf3--1546288317"
+)
+length(incoherent)
+
+tooFast = unique(subset(accTime, RT <2)$worker)#Workers who completed a trial in under 2 minutes
+
+intersect(incoherent,tooFast)
+
+temp = subset(accTime, worker %in% incoherent)
+temp1 = temp[order(temp$RT),]
+
+
+
+#The ones that got AM/PM wrong
+tooBad = unique(subset(dt.m, variable == "ampm" & value == 0)$worker)
+
+intersect(intersect(tooFast,tooBad),incoherent)
+remove = union(union(tooFast,tooBad), incoherent)
+remove = as.character(tooFast)
+
+#remove woman who did pilot and test
+#keep f024e515188e2c6879ee9216c3c57f0b--1545347499
+#remove f024e515188e2c6879ee9216c3c57f0b--1546282844
+remove = append(remove, "f024e515188e2c6879ee9216c3c57f0b--1546282844")
+#People that seem to have done garbage will hopefully not have made it past the filtering
+#953bcb6671fa9f1f53d629af93f26c54
+#fb7bf08e26b4e5d75c24bed7b9bb6db1
+remove = unique(append(remove,
+c("fb7bf08e26b4e5d75c24bed7b9bb6db1--1546280878","fb7bf08e26b4e5d75c24bed7b9bb6db1--1546286358","fb7bf08e26b4e5d75c24bed7b9bb6db1--1546286543","fb7bf08e26b4e5d75c24bed7b9bb6db1--1546286677",
+"953bcb6671fa9f1f53d629af93f26c54--1546284829", "953bcb6671fa9f1f53d629af93f26c54--1546285168")
+))
+remove = append(remove, "b3c149d4efe5ed61f083b644357f11c6--1546286120")#remove that one person with negative response time?? For good measure
+
+
+accTime.filtered = subset(accTime,!(worker %in% remove))
+
+
+ct.within.filtered = summarySE(data=accTime.filtered, measurevar = "Count", groupvars = c("Condition"))#can spit back up for RM
+mn.within = summarySEwithin(data=accTime, measurevar = "Mean", withinvars = c("Condition"), idvar = "worker")#Cond not within
+rt.within.filtered = summarySE(data=accTime.filtered, measurevar = "RT", groupvars = c("Condition"))#Cond not within
+
+
+#use gear > Chunk Output... for global setting on where plots appear
+ggplot(data=ct.within.filtered, aes(x=Condition, y=Count, fill=Condition)) +
+   geom_bar(stat="identity",position="dodge") +
+   geom_errorbar(aes(ymin=Count-se, ymax=Count+se), width=.1, position=position_dodge(.9)) +
+  ylab("Mean accuracy count") + xlab("")+ theme_bw() +theme(legend.position="none")  + ylim(c(0,7))
+
+ggplot(data=mn.within, aes(x=Condition, y=Mean, fill=Condition)) +
+   geom_bar(stat="identity",position="dodge") +
+   geom_errorbar(aes(ymin=Mean-ci, ymax=Mean+ci), width=.1, position=position_dodge(.9)) +
+  ylab("Mean overall accuracy") + xlab("") + theme_bw() 
+
+ggplot(data=rt.within.filtered, aes(x=Condition, y=RT, fill=Condition)) +
+   geom_bar(stat="identity",position="dodge") +
+   geom_errorbar(aes(ymin=RT-se, ymax=RT+se), width=.1, position=position_dodge(.9)) +
+  ylab("Mean RT (minutes)") + theme_bw() +theme(legend.position="none") 
+
+```
+
+##Scatter
+```{r}
+cm = as.vector(sapply(c("Plain","Markup") , function(x) median(subset(accTime, Condition==x)$Count)))
+tm = as.vector(sapply(c("Plain","Markup") , function(x) median(subset(accTime, Condition==x)$RT)))
+d.m = data.frame(Condition=levels(accTime$Condition), cval=cm, tval=tm)
+
+ggplot(accTime, aes(x=RT, y=Count, color=Condition)) +
+  geom_point(alpha=.3) + scale_color_manual(values=c(Plain="black", Markup="navyblue")) +
+  geom_vline(aes(xintercept=tval), colour="#888888", linetype="dashed", data=d.m)+
+  geom_hline(aes(yintercept=cval), colour="#888888", linetype="dashed", data=d.m)+
+  theme_bw() + theme(legend.position="none") + facet_wrap(~Condition) + ylab("Accuracy count") + xlab("Response time (minutes)")
+
+
+cm.f = as.vector(sapply(c("Plain","Markup") , function(x) median(subset(accTime.filtered, Condition==x)$Count)))
+tm.f = as.vector(sapply(c("Plain","Markup") , function(x) median(subset(accTime.filtered, Condition==x)$RT)))
+d.m.f = data.frame(Condition=levels(accTime.filtered$Condition), cval=cm.f, tval=tm.f)
+
+pdf("scatter.pdf",3,2)
+ggplot(accTime, aes(x=RT, y=Count, color=Condition)) +
+  geom_point(alpha=.3) + scale_color_manual(values=c(Plain="black", Markup="navyblue")) +
+  geom_vline(aes(xintercept=tval), colour="#888888", linetype="dashed", data=d.m.f)+
+  geom_hline(aes(yintercept=cval), colour="#888888", linetype="dashed", data=d.m.f)+
+  theme_bw() + theme(legend.position="none") + facet_wrap(~Condition) + ylab("Accuracy count") + xlab("Response time (minutes)")
+dev.off()
+
+```
+
+```{r}
+
+chance.count = sum(1/7,1/5,1/5,1/12,1/31,1/12,1/2)   *2
+
+ggplot(accTime, aes(x=RT, y=Count, color=Condition)) +
+  geom_point(alpha=.2) + 
+  geom_hline(yintercept = chance.count, color="gray") +
+  scale_x_continuous(minor_breaks = 1:20) +
+  theme_bw()
+
+shorties = c(
+"08b93376e9b18393b977779b238b1152--1515438955",
+"218e2ed32f662ef5ccffd84722e053ff--1515433248",
+"802dc8c455cb6ee99f74248fd9db24bb--1515432022",
+"8202f34066d3a0220ee709df47b218b2--1515437844",
+"d24d9f7f5abb74f2f32feb0d5df98a8f--1515433500"
+)
+
+#try
+#accTime = subset(accTime, !(worker %in% shorties))
+```
+
+
+##T test
+```{r}
+#checking differences
+accTime.wide = reshape(accTime.filtered, idvar="worker", timevar = "Condition", direction = "wide")
+ct.diff = accTime.wide$Count.plain - accTime.wide$Count.markup
+rt.diff = accTime.wide$RT.plain - accTime.wide$RT.markup
+ct.diff.mean=mean(ct.diff)
+rt.diff.mean=mean(rt.diff)
+ct.diff.var=var(ct.diff)
+ct.diff.var=var(rt.diff)
+z = .2088
+
+ct.diff.mean - (z*ct.diff.var)/sqrt(nrow(accTime.wide))
+ct.diff.mean + (z*ct.diff.var)/sqrt(nrow(accTime.wide))
+
+
+
+#Count
+#Normality - looks pretty normal
+hist(subset(accTime, Condition=="markup")$Count-subset(accTime, Condition=="plain")$Count)
+#Normality - not close enough to normal
+shapiro.test(subset(accTime, Condition=="markup")$Count-subset(accTime, Condition=="plain")$Count)
+#Non-parametric Wilcoxon signed rank test
+wilcox.test(subset(accTime.filtered, Condition=="Markup")$Count, subset(accTime.filtered,Condition=="Plain")$Count, paired=FALSE)
+#faster on plain
+sum((accTime.wide$Count.plain - accTime.wide$Count.markup)>0)
+sum((accTime.wide$Count.plain - accTime.wide$Count.markup)!=0)
+length(accTime.wide$Count.plain - accTime.wide$Count.markup)#For good measure
+#some other numbers?
+mean(accTime.wide$Count.plain)
+median(accTime.wide$Count.plain)
+mean(accTime.wide$Count.markup)
+median(accTime.wide$Count.markup)
+library(coin)
+g = factor(c(rep("Markup", length(subset(accTime.filtered, Condition=="Markup")$Count)), rep("Plain", length(subset(accTime.filtered, Condition=="Plain")$Count))))
+v = c(subset(accTime.filtered, Condition=="Markup")$Count, subset(accTime.filtered, Condition=="Plain")$Count)
+wilcox_test(v ~ g, distribution="exact")
+-0.088375/sqrt(nrow(accTime.filtered))#r
+r = as.numeric(rank(v))
+d = data.frame(g, r)
+lapply((split(d, d$g)), function(x) mean(x$r))
+
+#RT
+#t.rt.diff = t.test(subset(accTime, Condition=="markup")$RT, subset(accTime, Condition=="plain")$RT, paired=TRUE)$estimate
+#Normality - looks pretty normal
+hist(subset(accTime, Condition=="markup")$RT-subset(accTime, Condition=="plain")$RT)
+#Normality - not close enough to normal
+shapiro.test(subset(accTime, Condition=="markup")$RT-subset(accTime, Condition=="plain")$RT)
+#Non-parametric Wilcoxon signed rank test
+wilcox.test(subset(accTime.filtered, Condition=="Markup")$RT, subset(accTime.filtered,Condition=="Plain")$RT, paired=FALSE)
+#faster on plain
+sum((accTime.wide$RT.markup - accTime.wide$RT.plain)>0)
+length(accTime.wide$RT.markup - accTime.wide$RT.plain)
+#some other numbers?
+mean(accTime.wide$RT.plain)
+median(accTime.wide$RT.plain)
+mean(accTime.wide$RT.markup)
+median(accTime.wide$RT.markup)
+g = factor(c(rep("Markup", length(subset(accTime.filtered, Condition=="Markup")$RT)), rep("Plain", length(subset(accTime.filtered, Condition=="Plain")$RT))))
+v = c(subset(accTime.filtered, Condition=="Markup")$RT, subset(accTime.filtered, Condition=="Plain")$RT)
+wilcox_test(v ~ g, distribution="exact")
+1.301/sqrt(nrow(accTime.filtered))#r
+r = as.numeric(rank(v))
+d = data.frame(g, r)
+lapply((split(d, d$g)), function(x) mean(x$r))
+
+
+t.acc.diff = t.test(subset(accTime, Condition=="markup")$Count, subset(accTime,Condition=="plain")$Count, paired=TRUE)$estimate
+
+```
+
+TLX
+```{r}
+
+dq.m = melt(dq, id=c("worker","cond"), measure.vars = c("mental","physical","temp","success","perf","stress","preference"))
+#flip numbers so they match (shoot, did I already flip them in the experiment?)
+#dq.m[dq.m$cond=="b",]$value = as.integer(22-dq.m[dq.m$cond=="b",]$value)
+dq.m.filtered = subset(dq.m,!(worker %in% remove))
+
+ggplot(dq.m.filtered, aes(x=variable, y=value))+
+  geom_bar(stat = "summary", fun.y = "mean") +
+  ylim(0,21) + 
+  ylab("1=low, 21=high") +
+  geom_hline(yintercept = 11) + facet_wrap(~cond)
+
+ggplot(dq.m.filtered, aes(value))+
+  geom_bar() +
+  facet_grid(variable~cond)+ 
+  xlab("1=low, 21=high")
+
+#It might be better if I put it back around zero.
+
+dq.m.0 = dq.m
+dq.m.0$value =dq.m$value-11
+dq.m.0$Color = ifelse(dq.m.0$value <0, "plain", ifelse(dq.m.0$value>0, "markup", "equal"))
+
+
+ggplot(dq.m.0, aes(x=variable, y=value))+
+  geom_bar(stat = "summary", fun.y = "mean") +
+  ylim(-10,10) + 
+  ylab("-10=no markup, 10=markup")
+
+
+
+
+#make full questions?
+dq.m.0$full.q = dq.m.0$variable
+levels(dq.m.0$full.q) <- c("Which version of the task felt more mentally demanding? ",
+                           "Which version of the task felt more physically demanding?",
+                           "Which version of the task felt more hurried or rushed?",
+                           "On which version of the task do you think you performed better?",
+                           "On which version of the task did you feel you had to work harder?",
+                           "Which version of the task lead you to feel more insecure, discouraged,\n irritated, stressed, or annoyed?",
+                           "Overall, which version of the task do you prefer?")
+
+
+ggplot(dq.m.0, aes(value, fill=Color))+
+  geom_bar() +
+  scale_fill_manual(values=c("#969696","#00bfc4","#f8766d")) +
+  facet_wrap(~full.q, ncol=1)+ 
+  xlab("")+#xlab("-10=no markup, 10=markup") +
+  scale_x_continuous(labels=c("Definitely\n without markup","","","","","","","","","","Equal","","","","","","","","","","Definitely\n with markup"),
+                     breaks=-10:10) + theme_bw() + theme(legend.position="none")
+
+#Some sort of scatterplot?
+
+
+
+#ggplot(subset(dq.m.0,variable=="mental"), aes(value)) +
+#  stat_bin()
+
+
+#T-tests, but it's not that normal
+
+t.mental = t.test(subset(dq.m.0,variable=="mental")$value, mu=0)
+t.physical = t.test(subset(dq.m.0,variable=="physical")$value, mu=0)
+t.temp = t.test(subset(dq.m.0,variable=="temp")$value, mu=0)
+t.success = t.test(subset(dq.m.0,variable=="success")$value, mu=0)
+t.perf = t.test(subset(dq.m.0,variable=="perf")$value, mu=0)
+t.stress = t.test(subset(dq.m.0,variable=="stress")$value, mu=0)
+t.preference = t.test(subset(dq.m.0,variable=="preference")$value, mu=0)
+
+p=.05/7#unnecessary, right?
+t.mental$p.value < p
+t.physical$p.value < p
+t.temp$p.value < p
+t.success$p.value < p
+t.perf$p.value < p
+t.stress$p.value < p
+t.preference$p.value < p
+
+
+
+dq.m.0.2 = dq.m.0 %>%
+  group_by(variable) %>%
+  summarise(Markup=sum(value>0), Plain=sum(value<0), Even=sum(value==0))
+```
+
+Collect comments
+```{r}
+dc.ext = subset(dc, cond=="ext")$comments
+dc.orig = subset(dc, cond=="orig")$comments
+
+write.csv(data.table(orig=dc.orig,ext=dc.ext), file="comments.csv") 
+
+```
+
+ELICIT solutions
+```{r}
+dtg = gather(dt, q, correct, c(whoCorrect,whatCorrect,whereCorrect,monthCorrect,dayCorrect,timeCorrect,ampmCorrect), factor_key=TRUE)
+
+dtg$correct = as.logical(dtg$correct)
+
+ggplot(dtg, aes(x=q, y=as.numeric(correct))) +
+  geom_bar(stat = "summary", fun.y = "mean") +
+  geom_bar(data=data.frame(q=c("whoCorrect","whatCorrect","whereCorrect","monthCorrect","dayCorrect","timeCorrect","ampmCorrect"), correct=c(1/7,1/5,1/5,1/12,1/31,1/12,1/2)), aes(x=q, y=correct), fill="blue", stat="identity", position="dodge")
+
+
+dtgg = gather(cbind(dplyr::select(dtg,worker,block,scenario,cond,q,correct),random=c(1/7,1/5,1/5,1/12,1/31,1/12,1/2)), q, correct, c(correct,random), factor_key=TRUE)
+
+
+
+ggplot(data=rbind(cbind(dplyr::select(dtg,q,correct), rand=rep("real",nrow(dtg))), data.table(q=c("whoCorrect","whatCorrect","whereCorrect","monthCorrect","dayCorrect","timeCorrect","ampmCorrect"),correct=c(1/7,1/5,1/5,1/12,1/31,1/12,1/2), rand=rep("rand",7))), aes(x=q, y=correct,fill=rand)) +
+  geom_bar(stat="summary", fun.y="mean", position="dodge")
+
+
+ggplot(data=rbind(dplyr::select(dtg,q,cond,correct), data.table(q=c("whoCorrect","whatCorrect","whereCorrect","monthCorrect","dayCorrect","timeCorrect","ampmCorrect"),cond=(rep("chance",7)),correct=c(1/7,1/5,1/5,1/12,1/31,1/12,1/2) )), aes(x=q, y=correct, fill=cond)) +
+  geom_bar(stat="summary", fun.y="mean", position="dodge")
+#add SE bars, need another df with means and se already calculated (condTable)
+
+
+#subtract chance????
+dplyr::select(dtg,q,cond,correct)
+      
+dtg.chance = dtg %>% 
+  dplyr::select(q,cond,correct) %>%
+  group_by(q,cond) %>%
+  summarise(mean = mean(correct))
+dtg.chance$meanChance = dtg.chance$mean - rep(c(1/7,1/5,1/5,1/12,1/31,1/12,1/2), each=2)
+
+ggplot(data=dtg.chance, aes(x=q, y=meanChance, fill=cond)) +
+  geom_bar(stat="identity", position="dodge")
+
+
+
+
+```
+
+
+#More cleaning
+```{r}
+
+```
+
+#Stats
+```{r eval=FALSE}
+########Borrowed########
+#contrasts
+mat = matrix(c(1/4, 1/4, 1/4, 1/4,  1,-1, 0, 0,  0, 0, 1, -1,  -1/2, -1/2, 1/2, 1/2), ncol = 4)
+#I have no idea what the first column of the matrix is, I just copied the example. Intercept?
+mymat = solve(t(mat))
+my.contrasts<-mymat[,2:4]
+dt$complexType=factor(dt$complexType,levels=c("ident","rel","and","neg"))#make sure they're in order
+contrasts(dt$complexType) = my.contrasts
+########################
+
+#plain/pipeline (default dummy coding) - check direction,
+#Sean suggests q comparisons are best handled post hoc, other methods tend to require a baseline  
+
+#Model
+model.correct=glmer(correct ~ cond + (1|worker) + (1|q) , data=dt2, family=gaussian) 
+summary(model.correct)
+#How do I include q in the model so that I can do post hoc comparisons?
+library(lsmeans)
+#model.correct.lsm = lsmeans(model.correct, ~cond*q, adjust="Tukey") 
+#contrast(model.correct.lsm, interaction = c("poly", "pairwise"))
+#Do separate models for each q and adjust p-value?
+model.correct.who=glmer(correct ~ cond + (1|worker) , data=subset(dt2,q=="who"), family=gaussian) 
+summary(model.correct.who)
+model.correct.what=glmer(correct ~ cond + (1|worker) , data=subset(dt2,q=="what"), family=gaussian) 
+summary(model.correct.what)
+
+model.time=lmer(responseTime ~ cond + (1|worker) , data=dt2) 
+summary(model.time) #~anova(model.time)
+#doesn't make sense to look at q wrt time (all same)
+
+
+
+
+
+
+#model.matrix(lmer(responseTime ~ scenario + (1|worker) , data=dt2))
+
+
+
+
+
+#check values
+mean(dt2$correct)
+mean(subset(dt2, cond=="plain")$correct)
+mean(subset(dt2, cond=="markup")$correct)
+mean(subset(dt2, q!="who")$correct)
+
+dt2 %>%
+  group_by(q, cond) %>%
+  summarise(mean = mean(correct))
+
+dt2 %>%
+  group_by(q) %>%
+  summarise(mean = mean(correct))
+
+dt2 %>%
+  group_by(cond) %>%
+  summarise(mean = mean(correct))
+
+
+
+
+#Jon says try scenario and Q as random
+```
+
+T-tests
+```{r}
+
+#Paired t-test
+t.test(subset(dt, cond=="markup")$responseTime, subset(dt, cond=="plain")$responseTime, paired=TRUE)
+t.test(subset(accTime, Condition=="markup")$RT, subset(accTime,Condition=="plain")$RT, paired=TRUE)
+
+t.test(subset(avacc, Condition=="markup")$Mean, subset(avacc,Condition=="plain")$Mean, paired=TRUE)
+
+
+#####
+#Roughly normal
+ggplot(dt, aes(responseTime))+
+  stat_bin(binwidth=1)
+ggplot(dt, aes(log(1/responseTime)))+
+  stat_bin(binwidth=.2)
+
+ggplot(avacc, aes(Mean))+
+  stat_bin(bins=8)
+avacc.diff=data.frame(diff=subset(avacc,Condition=="plain")$Mean-subset(avacc,Condition=="markup")$Mean)
+ggplot(avacc.diff, aes(diff))+
+  stat_bin(binwidth=.05)
+
+qqnorm(dt$responseTime)
+qqnorm(log(1/dt$responseTime))
+
+qqnorm(subset(avacc,Condition=="plain")$Mean-subset(avacc,Condition=="markup")$Mean)
+#one place says " If the condition of normality is not met, the Wilcoxon rank sum test (Mann-Whitney U test) is used for independent samples, and the Wilcoxon sign rank test is used for paired samples for an additional nonparametric test."
+#"A Wilcoxon signed-rank test is a nonparametric test that can be used to determine whether two dependent samples were selected from populations having the same distribution"
+ggplot(data=accTime, aes(Count)) +
+  geom_histogram(binwidth=1) + 
+  facet_wrap(~Condition, ncol=1) +
+  theme_bw()
+
+
+
+#JB is for time series (ARIMA)
+#KS is only for comparing two continuous distributions
+#ks.test(avacc$Mean, "norm")
+#shapiro.test(avacc$Mean)
+hist(avacc.diff$diff)
+shapiro.test(avacc.diff$diff)#today it's not normal?
+
+
+
+wilcox.test(subset(avacc, Condition=="markup")$Mean, subset(avacc,Condition=="plain")$Mean, paired=TRUE)
+wilcox.test(subset(accTime, Condition=="markup")$Count, subset(accTime,Condition=="plain")$Count, paired=TRUE)#why are these two giving different values?? Weird decimal ranks
+se(subset(accTime, Condition=="markup")$Count - subset(accTime,Condition=="plain")$Count)
+#rank correction for effect size?
+
+
+#Accuracy isn't exactly continuous here (8 possible values)
+
+#Homogeneity of variance (Doesn't matter since sampling same population?)
+var(subset(dt, cond=="markup")$responseTime, na.rm=TRUE)
+var(subset(dt, cond=="plain")$responseTime, na.rm=TRUE)
+
+var(subset(avacc, Condition=="markup")$Mean)
+var(subset(avacc, Condition=="plain")$Mean)
+#####
+
+
+
+
+
+# #looking at individual questions
+# dt2 %>%
+#   subset(q=="who") %>%
+#   group_by(cond) %>%
+#   summarise(correct=sum(correct), incorrect=(100-sum(correct)))
+# contingency = dt2 %>%
+#   group_by(q,cond) %>%
+#   summarise(correct=sum(correct), incorrect=(100-sum(correct)))
+# 
+# contingency = as.data.frame(contingency)
+# 
+# 
+# cont.ampm = contingency[1:2,3:4] # data.matrix
+# rownames(cont.ampm) = c("plain","markup")
+# mat.ampm = matrix(c(sum(cont.ampm$correct), cont.ampm$correct[1]+cont.ampm$incorrect[2], 
+#                    cont.ampm$correct[2]+cont.ampm$incorrect[1], sum(cont.ampm$incorrect)),
+#                    byrow=TRUE,ncol=2)
+# 
+# cont.day = contingency[3:4,3:4] # data.matrix
+# rownames(cont.day) = c("plain","markup")
+# mat.day = matrix(c(sum(cont.day$correct), cont.day$correct[1]+cont.day$incorrect[2], 
+#                    cont.day$correct[2]+cont.day$incorrect[1], sum(cont.day$incorrect)),
+#                    byrow=TRUE,ncol=2)
+# 
+# cont.month = contingency[5:6,3:4] # data.matrix
+# #rownames(cont.time) = c("plain","markup")
+# mat.month = matrix(c(sum(cont.month$correct), cont.month$correct[1]+cont.month$incorrect[2], 
+#                    cont.month$correct[2]+cont.month$incorrect[1], sum(cont.month$incorrect)),
+#                    byrow=TRUE,ncol=2)
+# 
+# cont.time = contingency[7:8,3:4] # data.matrix
+# rownames(cont.time) = c("plain","markup")
+# mat.time = matrix(c(sum(cont.time$correct), cont.time$correct[1]+cont.time$incorrect[2], 
+#                    cont.time$correct[2]+cont.time$incorrect[1], sum(cont.time$incorrect)),
+#                    byrow=TRUE,ncol=2)
+# 
+# cont.what = contingency[9:10,3:4] # data.matrix
+# #rownames(cont.time) = c("plain","markup")
+# mat.what = matrix(c(sum(cont.what$correct), cont.what$correct[1]+cont.what$incorrect[2], 
+#                    cont.what$correct[2]+cont.what$incorrect[1], sum(cont.what$incorrect)),
+#                    byrow=TRUE,ncol=2)
+# 
+# cont.where = contingency[11:12,3:4] # data.matrix
+# #rownames(cont.time) = c("plain","markup")
+# mat.where = matrix(c(sum(cont.where$correct), cont.where$correct[1]+cont.where$incorrect[2], 
+#                    cont.where$correct[2]+cont.where$incorrect[1], sum(cont.where$incorrect)),
+#                    byrow=TRUE,ncol=2)
+# 
+# cont.who = contingency[13:14,3:4] # data.matrix
+# #rownames(cont.time) = c("plain","markup")
+# mat.who = matrix(c(sum(cont.who$correct), cont.who$correct[1]+cont.who$incorrect[2], 
+#                    cont.who$correct[2]+cont.who$incorrect[1], sum(cont.who$incorrect)),
+#                    byrow=TRUE,ncol=2)
+# 
+# mcnemar.test(mat.ampm, y = NULL, correct = TRUE)
+# mcnemar.test(mat.day, y = NULL, correct = TRUE)
+# mcnemar.test(mat.month, y = NULL, correct = TRUE)
+# mcnemar.test(mat.time, y = NULL, correct = TRUE)
+# mcnemar.test(mat.what, y = NULL, correct = TRUE)
+# mcnemar.test(mat.where, y = NULL, correct = TRUE)
+# mcnemar.test(mat.who, y = NULL, correct = TRUE)
+# 
+# #corrected p-value (Bonferroni) - not needed
+# 
+# 
+
+
+
+
+```
+
+#Jon
+```{r}
+
+#underdispersion not unlikely when variance is limited (0-7)
+#Under when variance << mean ? (truncated on each end)
+mean(accTime.filtered$Count)
+var(accTime.filtered$Count)
+
+ggplot(data=accTime.filtered, aes(x=Count, y=RT, color=Condition)) +
+  geom_point(alpha=.3) +
+  theme_bw()
+
+#Spaghetti - might redo with order? or just drop
+ggplot(data = accTime, aes(x = Condition, y = RT, group = worker)) +
+  ylab("Response time (minutes)") + 
+  geom_point(alpha=.2) + 
+  geom_line(size=1, alpha=.25) + 
+  theme_bw()
+ggplot(data = accTime, aes(x = Condition, y = Count, group = worker)) +
+  ylab("Accuracy count") + 
+  geom_line(size=1, alpha=.1) + 
+  geom_point(alpha=.1) +
+  theme_bw() + theme(legend.position="none")
+
+
+#Comparing which version was seen first
+accTime$Count_j <- jitter(accTime$Count) #jitter accuracy
+nbl.n="Trial condition\norder"
+nbl.b=c("plain", "markup")
+nbl.l=c("plain>markup", "markup>plain")
+ggplot(data = accTime, aes(x=Condition, y=Count_j, color=first, linetype=first)) +
+  ylab("Accuracy count") +  
+  geom_point(alpha=.25) +
+  geom_line(size=1, alpha=.25, aes(group = worker)) +
+  scale_color_manual(name=nbl.n, breaks=nbl.b, labels=nbl.l, values=c(plain="mediumpurple1", markup="darkgreen")) +
+  scale_linetype_manual(name=nbl.n, breaks=nbl.b, labels=nbl.l, values = c(1,2)) + #Same name needed to merge legends
+  theme_bw()
+ggplot(data = accTime, aes(x=Condition, y=RT, color=first, linetype=first)) +
+  ylab("Response time (minutes)") +
+  geom_point(alpha=.25) +
+  geom_line(size=1, alpha=.25, aes(group = worker)) + 
+  scale_color_manual(name=nbl.n, breaks=nbl.b, labels=nbl.l, values=c(plain="mediumpurple1", markup="darkgreen")) +
+  scale_linetype_manual(name=nbl.n, breaks=nbl.b, labels=nbl.l, values = c(1,2)) + #Same name needed to merge legends
+  theme_bw()
+
+
+median(subset(accTime, Block==1)$Count)
+median(subset(accTime, Block==2)$Count)
+medians = data.frame(
+  First = c("Plain", "Plain", "Markup","Markup"),
+  Condition = c("Plain", "Markup", "Plain", "Markup"),
+  Count = c(
+    median(subset(accTime.wide, first.plain=="plain")$Count.plain),
+    median(subset(accTime.wide, first.plain=="plain")$Count.markup),
+    median(subset(accTime.wide, first.plain=="markup")$Count.plain),
+    median(subset(accTime.wide, first.plain=="markup")$Count.markup)
+  ),
+  RT = c(
+    median(subset(accTime.wide, first.plain=="plain")$RT.plain),
+  median(subset(accTime.wide, first.plain=="plain")$RT.markup),
+  median(subset(accTime.wide, first.plain=="markup")$RT.plain),
+  median(subset(accTime.wide, first.plain=="markup")$RT.markup)
+  )
+)
+medians$First = relevel(as.factor(medians$First),"Plain")
+medians$Condition = relevel(as.factor(medians$Condition),"Plain")
+
+sum((subset(accTime.wide, first.plain=="plain")$Count.plain - subset(accTime.wide, first.plain=="plain")$Count.markup)>0)
+sum((subset(accTime.wide, first.plain=="plain")$Count.plain - subset(accTime.wide, first.plain=="plain")$Count.markup)!=0)
+23/45
+sum((subset(accTime.wide, first.plain=="markup")$Count.plain - subset(accTime.wide, first.plain=="markup")$Count.markup)>0)
+sum((subset(accTime.wide, first.plain=="markup")$Count.plain - subset(accTime.wide, first.plain=="markup")$Count.markup)!=0)
+23/32
+
+median(subset(accTime, Block==1)$RT)
+median(subset(accTime, Block==2)$RT)
+median(subset(accTime.wide, first.plain=="plain")$RT.plain)
+median(subset(accTime.wide, first.plain=="plain")$RT.markup)
+median(subset(accTime.wide, first.plain=="markup")$RT.plain)
+median(subset(accTime.wide, first.plain=="markup")$RT.markup)
+sum((subset(accTime.wide, first.plain=="plain")$RT.markup - subset(accTime.wide, first.plain=="plain")$RT.plain)>0)
+sum((subset(accTime.wide, first.plain=="plain")$RT.markup - subset(accTime.wide, first.plain=="plain")$RT.plain)!=0)
+33/61
+sum((subset(accTime.wide, first.plain=="markup")$RT.markup - subset(accTime.wide, first.plain=="markup")$RT.plain)>0)
+sum((subset(accTime.wide, first.plain=="markup")$RT.markup - subset(accTime.wide, first.plain=="markup")$RT.plain)!=0)
+25/39
+```
+
+##Quasi-poisson
+```{r eval=FALSE}
+library(pscl)#for odTest
+library(MASS)
+
+#lmer(Mean ~ condition + (1|worker), data=avacc, family="quasipoisson")
+
+#histogram((subset(accTime,Condition=="Plain")$Count-subset(accTime,Condition=="Markup")$Count), breaks=-7:7)
+#shapiro.test((subset(accTime,Condition=="Plain")$Count-subset(accTime,Condition=="Markup")$Count))
+histogram(accTime$Count)#, breaks=-7:7)
+shapiro.test(accTime$Count)#should I do worker average instead of every trial?
+
+
+  
+AccB<-glmer(Mean ~ Condition + (1|worker),  data = accTime, family="binomial")
+  #odTest(AccNB) #Needs glm.nb
+  summary(AccB)
+  #Large dispersion parameter and iteration limit reached suggests poisson?
+
+  
+#https://peerj.com/articles/616/
+AccP<-glmer(Count~Condition + (1|worker), family=poisson(),  data = accTime) 
+summary(AccP)
+#histogram(accTime$Count, breaks=0:7)
+
+qqnorm(resid(AccP))#Skewed
+qqplot(qpois(ppoints(30),lambda=2),(resid(AccP)))
+#The ratio of residual deviance to df should be 1 with poisson
+#https://biometry.github.io/APES/LectureNotes/2016-JAGS/Overdispersion/OverdispersionJAGS.pdf
+821/197 #4
+#https://stats.stackexchange.com/questions/83611/how-to-fix-an-overdispersion-in-a-poisson-glmm-with-glmer-function-in-r
+
+anova(glmer(Count~Condition + (1|worker), family=poisson(),  data = accTime) ,
+      glmer(Count~ (1|worker), family=poisson(),  data = accTime) )
+
+anova(glmer(Count~Condition + (1|worker), data = accTime) ,
+      glmer(Count~ (1|worker),  data = accTime) )
+
+
+
+
+# AccQP<-glmer(Count~Condition + (1|worker), family=quasipoisson(),  data = accTime) 
+#       summary(AccQP)
+#       #under-dispersed (.68*variance = mean)
+#       AccQP$coefficients
+#       plot(avacc$Condition,avacc$Count)
+# plot(AccQP)
+
+
+#Pseudo R2: Fits lm using glm.nb model #For glmer?
+library(boot)
+  pseudo.R2 <- function(model)
+    {
+    lmR2<- lm(model.response(model.frame(model)) ~ fitted(model))
+    c(summary(lmR2)$r.squared)
+    }
+  
+  set.seed(1234)
+  R2boot <- boot(accTime,function(data,i)
+            summary(lmer(Count~Condition + (1|worker), data[i,]))$r.squared, R=1000)
+  
+  # pseudo.R2(AccNB)
+  # quantile(R2boot$t,c(0.025,0.975))
+
+
+#For time
+library(lmerTest)
+Time<-lmer(RT~Condition + (1|worker), data = accTime) 
+summary(Time)
+
+plot(Time)#more spread out on the right... less on the left?
+qqnorm(resid(Time))
+
+anova(lmer(RT~Condition + (1|worker), data = accTime, REML=FALSE) ,
+      lmer(RT~ (1|worker), data = accTime, REML=FALSE) )
+```
+
+
+```{r eval=FALSE}
+library(brms)
+
+fit1 = brm(formula = Count ~ Condition + (1|worker),
+    data = accTime, family = poisson() #negbinomial
+    )
+
+
+```
+
+
+
+Order? Scenario?
+````{r}
+
+block.c = summarySEwithin(accTime, measurevar="Count", withinvars=c("Condition"), betweenvars = c("first"), idvar="worker")
+block.r = summarySEwithin(accTime, measurevar="RT", withinvars=c("Condition"), betweenvars=c("first"), idvar="worker")
+
+
+ggplot(block.c, aes(first, Count, fill=Condition)) +
+  geom_bar(stat="identity", position="dodge") +
+  geom_errorbar(aes(ymin=Count-ci, ymax=Count+ci), width=.1, position=position_dodge(.9)) + theme_bw()
+
+ggplot(block.r, aes(first, RT, fill=Condition)) +
+  geom_bar(stat="identity", position="dodge") +
+  geom_errorbar(aes(ymin=RT-ci, ymax=RT+ci), width=.1, position=position_dodge(.9)) 
+
+
+ggplot(medians, aes(First, Count, fill=Condition)) +
+  geom_bar(stat="identity", position="dodge") +
+  scale_fill_manual(values=c(Plain="gray", Markup="navyblue")) +
+  theme_bw() + xlab("Condition seen first") + ylab("Median accuracy count") +ylim(c(0,7))
+
+ggplot(medians, aes(First, RT, fill=Condition)) +
+  geom_bar(stat="identity", position="dodge") +
+  scale_fill_manual(values=c(Plain="gray", Markup="navyblue")) +
+  theme_bw() + xlab("Condition seen first") + ylab("Median RT (minutes)")
+
+scen.c = summarySEwithin(accTime, measurevar="Count", withinvars=c("Condition","Scenario"), idvar="worker")#not fully within or between...
+scen.r = summarySEwithin(accTime, measurevar="RT", withinvars=c("Condition","Scenario"), idvar="worker")#not fully within or between...
+
+ggplot(scen.c, aes(Scenario, Count, fill=Condition)) +
+  geom_bar(stat="identity", position="dodge") +
+  geom_errorbar(aes(ymin=Count-ci, ymax=Count+ci), width=.1, position=position_dodge(.9)) #too small?
+
+ggplot(scen.r, aes(Scenario, RT, fill=Condition)) +
+  geom_bar(stat="identity", position="dodge") +
+  geom_errorbar(aes(ymin=RT-ci, ymax=RT+ci), width=.1, position=position_dodge(.9)) #too small?
+
+
+accTime %>%
+  group_by(Block) %>%
+  summarise(N=n(),Count=median(Count), RT=median(RT))
+
+
+
+
+#who scored higher in the first/second block?
+#count
+avacc2 = dt.m %>%
+  subset(variable!="responseTime") %>%
+  group_by(worker,block) %>%
+  summarise(Count=sum(value))
+
+accTime2 = merge(avacc2, dplyr::select(dt, worker,block, RT=responseTime))
+
+#accTime2.wide = reshape(accTime2, idvar="worker", timevar = "Condition", direction = "wide")
+
+sum((subset(accTime2, block==2)$Count - subset(accTime2, block==1)$Count)>0)# better score in block 2
+sum((subset(accTime2, block==2)$Count - subset(accTime2, block==1)$Count)!=0)# better score in block 1
+45/77 #58%
+sum((subset(accTime2, block==1)$RT - subset(accTime2, block==2)$RT)>0)# better score in block 2
+sum((subset(accTime2, block==1)$RT - subset(accTime2, block==2)$RT)!=0)# better score in block 1
+53/100 #53%
+##Add a wilcoxon
+wilcox.test(subset(accTime2, block==1)$Count, subset(accTime2,block==2)$Count, paired=TRUE)
+wilcox.test(subset(accTime2, block==1)$RT, subset(accTime2,block==2)$RT, paired=TRUE)
+
+
+scenMed = accTime %>%
+  group_by(Condition, Scenario) %>%
+  summarise(N=n(),Count=median(Count), RT=median(RT))
+
+ggplot(scenMed, aes(Scenario, Count, fill=Condition)) +
+  geom_bar(stat="identity", position="dodge") + scale_fill_manual(values=c(plain="gray", markup="royalblue4")) +
+  ylab("Median accuracy count") + theme_bw() +
+  #geom_point(data=accTime, aes(Scenario, Count, color=Condition), position=position_jitterdodge(jitter.width = .7, jitter.height = 0, dodge.width = 0.9), pch=21, color="black", alpha=.7)
+  geom_dotplot(data=accTime, aes(Scenario, Count, color=Condition), position=position_dodge(width = 0.9), pch=21, color="black", alpha=.7, binaxis = "y", stackdir = "center", binwidth = 0.1)
+
+ggplot(scenMed, aes(Scenario, RT, fill=Condition)) +
+  geom_bar(stat="identity", position="dodge") + scale_fill_manual(values=c(plain="gray", markup="royalblue4")) +
+  ylab("Median reaction time (minutes)") + theme_bw() +
+  geom_point(data=accTime, aes(Scenario, RT, color=Condition), position=position_dodge(width=.9), pch=21, color="black", alpha=.7)
+  #geom_dotplot(data=accTime, aes(Scenario, RT), binaxis = "y", stackdir = "center", binwidth = 0.9)
+#interesting... speed driven by scenarios 1 and 4?
+```
+##Demographics
+```{r}
+
+#grab one row per person (won't capture all comments, blocked)
+demos = dt[(0:((nrow(dt)/2) -1) * 2 )+1, c("language","age","gender","education","comments")]
+
+#Do you consider English your first or primary language? 
+table(demos$language)
+#Please select your age range: 
+table(demos$age)
+#Please select your gender: 
+table(demos$gender)
+#Please select your highest level of educational attainment: 
+table(demos$education)
+
+ 
+
+#Average time per assignment (according to AMT): 44:10
+#Payment: $2.50?
+
+
+```
+
+
+##Scores + preferences
+```{r}
+
+plainPrefWorkers=subset(dq.m.0,full.q=="Overall, which version of the task do you prefer?" & value<0)$worker
+markupPrefWorkers=subset(dq.m.0,full.q=="Overall, which version of the task do you prefer?" & value>0)$worker
+
+median(subset(accTime, worker %in% plainPrefWorkers)$Count)
+median(subset(accTime, worker %in% plainPrefWorkers)$RT)
+median(subset(accTime, worker %in% markupPrefWorkers)$Count)
+median(subset(accTime, worker %in% markupPrefWorkers)$RT)
+
+
+prefMedians = data.frame(
+  Preference = c("Plain", "Plain", "Markup","Markup"),
+  Condition = c("Plain", "Markup", "Plain", "Markup"),
+  N = c(
+    nrow(subset(accTime, worker %in% plainPrefWorkers & Condition=="plain")),
+    nrow(subset(accTime, worker %in% plainPrefWorkers & Condition=="markup")),
+    nrow(subset(accTime, worker %in% markupPrefWorkers & Condition=="plain")),
+    nrow(subset(accTime, worker %in% markupPrefWorkers & Condition=="markup"))
+    ),
+  Count = c(
+    median(subset(accTime, worker %in% plainPrefWorkers & Condition=="plain")$Count),
+    median(subset(accTime, worker %in% plainPrefWorkers & Condition=="markup")$Count),
+    median(subset(accTime, worker %in% markupPrefWorkers & Condition=="plain")$Count),
+    median(subset(accTime, worker %in% markupPrefWorkers & Condition=="markup")$Count)
+  ),
+  RT = c(
+    median(subset(accTime, worker %in% plainPrefWorkers & Condition=="plain")$RT),
+    median(subset(accTime, worker %in% plainPrefWorkers & Condition=="markup")$RT),
+    median(subset(accTime, worker %in% markupPrefWorkers & Condition=="plain")$RT),
+    median(subset(accTime, worker %in% markupPrefWorkers & Condition=="markup")$RT)
+  )
+)
+
+
+
+
+prefOrderMedians = data.frame(
+  Preference = c("Plain", "Plain", "Markup","Markup"),
+  First = c("Plain", "Markup", "Plain", "Markup"),
+  N = c(
+    nrow(subset(accTime, worker %in% plainPrefWorkers & first=="plain"))/2,
+    nrow(subset(accTime, worker %in% plainPrefWorkers & first=="markup"))/2,
+    nrow(subset(accTime, worker %in% markupPrefWorkers & first=="plain"))/2,
+    nrow(subset(accTime, worker %in% markupPrefWorkers & first=="markup"))/2
+  )
+)
+
+```
+
+
+##Look just at those who scored above chance
+```{r}
+
+
+```
+
+
+
+
+
+```{r}
+dq.table = with(dq.m.filtered, table(value,variable,cond))
+
+#not real sure this is right, might be better to make 3 bins?
+fisher.test(t(rbind(dq.table[,"mental","P"],dq.table[,"mental","M"]))) #this looks better, both M give 1
+fisher.test( rbind(dq.table[,"physical","P"],dq.table[,"physical","M"]))
+fisher.test( rbind(dq.table[,"temp","P"],dq.table[,"temp","M"]))
+fisher.test( rbind(dq.table[,"success","P"],dq.table[,"success","M"]))
+fisher.test( rbind(dq.table[,"perf","P"],dq.table[,"perf","M"]))
+fisher.test( rbind(dq.table[,"success","P"],dq.table[,"success","M"]))
+fisher.test( rbind(dq.table[,"stress","P"],dq.table[,"stress","M"]))
+fisher.test(t(rbind(dq.table[,"preference","P"],dq.table[,"preference","M"])))
+
+
+mental.p = table(cut(subset(dq.m.filtered,variable=="mental" & cond=="P")$value,breaks=c(0,7,14,21)))
+mental.m = table(cut(subset(dq.m.filtered,variable=="mental" & cond=="M")$value,breaks=c(0,7,14,21)))
+fisher.test(rbind(mental.p,mental.m))
+chisq.test(rbind(mental.p,mental.m))
+median(subset(dq.m.filtered,variable=="mental" & cond=="P")$value)
+median(subset(dq.m.filtered,variable=="mental" & cond=="M")$value)
+
+physical.p = table(cut(subset(dq.m.filtered,variable=="physical" & cond=="P")$value,breaks=c(0,7,14,21)))
+physical.m = table(cut(subset(dq.m.filtered,variable=="physical" & cond=="M")$value,breaks=c(0,7,14,21)))
+fisher.test(rbind(physical.p,physical.m))
+chisq.test(rbind(physical.p,physical.m))
+median(subset(dq.m.filtered,variable=="physical" & cond=="P")$value)
+median(subset(dq.m.filtered,variable=="physical" & cond=="M")$value)
+
+temp.p = table(cut(subset(dq.m.filtered,variable=="temp" & cond=="P")$value,breaks=c(0,7,14,21)))
+temp.m = table(cut(subset(dq.m.filtered,variable=="temp" & cond=="M")$value,breaks=c(0,7,14,21)))
+fisher.test(rbind(temp.p,temp.m))
+chisq.test(rbind(temp.p,temp.m))
+median(subset(dq.m.filtered,variable=="temp" & cond=="P")$value)
+median(subset(dq.m.filtered,variable=="temp" & cond=="M")$value)
+
+success.p = table(cut(subset(dq.m.filtered,variable=="success" & cond=="P")$value,breaks=c(0,7,14,21)))
+success.m = table(cut(subset(dq.m.filtered,variable=="success" & cond=="M")$value,breaks=c(0,7,14,21)))
+fisher.test(rbind(success.p,success.m))
+chisq.test(rbind(success.p,success.m))
+median(subset(dq.m.filtered,variable=="success" & cond=="P")$value)
+median(subset(dq.m.filtered,variable=="success" & cond=="M")$value)
+
+perf.p = table(cut(subset(dq.m.filtered,variable=="perf" & cond=="P")$value,breaks=c(0,7,14,21)))
+perf.m = table(cut(subset(dq.m.filtered,variable=="perf" & cond=="M")$value,breaks=c(0,7,14,21)))
+fisher.test(rbind(perf.p,perf.m))
+chisq.test(rbind(perf.p,perf.m))
+median(subset(dq.m.filtered,variable=="perf" & cond=="P")$value)
+median(subset(dq.m.filtered,variable=="perf" & cond=="M")$value)
+
+stress.p = table(cut(subset(dq.m.filtered,variable=="stress" & cond=="P")$value,breaks=c(0,7,14,21)))
+stress.m = table(cut(subset(dq.m.filtered,variable=="stress" & cond=="M")$value,breaks=c(0,7,14,21)))
+fisher.test(rbind(stress.p,stress.m))
+chisq.test(rbind(stress.p,stress.m))
+median(subset(dq.m.filtered,variable=="stress" & cond=="P")$value)
+median(subset(dq.m.filtered,variable=="stress" & cond=="M")$value)
+
+length(unique(dq.m.filtered$worker))
+
+preference.p = table(cut(subset(dq.m.filtered,variable=="preference" & cond=="P")$value,breaks=c(0,10,11,21)))
+preference.m = table(cut(subset(dq.m.filtered,variable=="preference" & cond=="M")$value,breaks=c(0,10,11,21)))
+fisher.test(rbind(preference.p,preference.m))
+chisq.test(rbind(preference.p,preference.m))
+
+preference = table(cut(subset(dq.m.filtered,variable=="preference")$value,breaks=c(0,10,11,21)))
+chisq.test(preference[c(1,3)])
+sum(preference[c(1,3)])
+
+#fisher.test(rbind(mental,mental.null))
+chisq.test(mental[c(1,3)])
+sum(mental[c(1,3)])
+
+```
