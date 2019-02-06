@@ -354,7 +354,7 @@ ct.diff.mean + (z*ct.diff.var)/sqrt(nrow(accTime.wide))
 
 #Count
 #Normality - looks pretty normal
-hist(subset(accTime, Condition=="Markup")$Count-subset(accTime, Condition=="Plain")$Count)
+hist(subset(accTime, Condition=="markup")$Count-subset(accTime, Condition=="plain")$Count)
 #Normality - not close enough to normal
 shapiro.test(subset(accTime, Condition=="markup")$Count-subset(accTime, Condition=="plain")$Count)
 #Non-parametric Wilcoxon signed rank test
@@ -513,7 +513,7 @@ ggplot(dtg, aes(x=q, y=as.numeric(correct))) +
   geom_bar(data=data.frame(q=c("whoCorrect","whatCorrect","whereCorrect","monthCorrect","dayCorrect","timeCorrect","ampmCorrect"), correct=c(1/7,1/5,1/5,1/12,1/31,1/12,1/2)), aes(x=q, y=correct), fill="blue", stat="identity", position="dodge")
 
 
-dtgg = gather(cbind(dplyr::select(dtg,worker,scenario,cond,q,correct),random=c(1/7,1/5,1/5,1/12,1/31,1/12,1/2)), q, correct, c(correct,random), factor_key=TRUE)
+dtgg = gather(cbind(dplyr::select(dtg,worker,block,scenario,cond,q,correct),random=c(1/7,1/5,1/5,1/12,1/31,1/12,1/2)), q, correct, c(correct,random), factor_key=TRUE)
 
 
 
@@ -1017,7 +1017,7 @@ ggplot(scenMed, aes(Scenario, RT, fill=Condition)) +
 
 ##Demographics - can we predict/explain who will benefit from markup? (people who score higher with markup)
 ```{r}
-#Pre-filtering
+
 #grab one row per person (won't capture all comments, blocked)
 demos = dt[(0:((nrow(dt)/2) -1) * 2 )+1, c("worker","language","age","gender","education","occupation","comments")]
 
@@ -1042,16 +1042,8 @@ accTime.filtered.summarise =
     group_by(worker) %>%
     summarise(Condition = Condition[1], meanCount = mean(Count), meanRT = mean(RT))
 
-
-demos.results = merge(demos, accTime.summarise)
-demos.results = merge(demos.results,dq.m[dq.m$variable=="preference",c("worker","value")], by="worker")
-demos.results$prefSame = demos.results$value
-demos.results[demos.results$Condition=="Plain","prefSame"] = 22 - demos.results[demos.results$Condition=="Plain","value"] #flip scale
-
-demos.results.f = merge(demos, accTime.filtered.summarise)
-demos.results.f = merge(demos.results.f,dq.m.filtered[dq.m.filtered$variable=="preference",c("worker","value")], by="worker")#doesn't have preference yet
-demos.results.f$prefSame = demos.results.f$value
-demos.results.f[demos.results.f$Condition=="Plain","prefSame"] = 22 - demos.results.f[demos.results.f$Condition=="Plain","value"] #flip scale
+demos.results = merge(demos, accTime.filtered.summarise)
+demos.results = merge(demos.results,dq.m.filtered[dq.m.filtered$variable=="preference",c("worker","value")], by="worker")#doesn't have preference yet
 
 demr = 
 demos.results %>%
@@ -1069,16 +1061,10 @@ demos.results %>%
 
 
 #check correlation between preference and +/- Tech
-ggplot(demos.results.f, aes(value, as.numeric(occupation=="Science and Technology"))) +
+ggplot(demos.results, aes(value, as.numeric(occupation=="Science and Technology"))) +
   geom_jitter(height=.1) +
   geom_smooth(method="lm")+ facet_grid(~Condition)
-with(demos.results.f, cor(value, occupation=="Science and Technology"))#teeny tiny
-  with(subset(demos.results.f, Condition=="Plain"), cor(value, occupation=="Science and Technology"))
-  with(subset(demos.results.f, Condition=="Markup"), cor(value, occupation=="Science and Technology"))
-  
-with(demos.results.f, cor(meanCount, occupation=="Science and Technology"))#tiny
-with(demos.results.f, cor(meanRT, occupation=="Science and Technology"))#tiny
-
+cor(demos.results$value, demos.results$occupation=="Science and Technology")#tiny
 
 ggplot(demos.results, aes(value, education)) +
   geom_jitter(alpha=.2)
@@ -1092,12 +1078,17 @@ ggplot(demos.results, aes(value, meanCount)) +
   geom_jitter(height=.1, width=.1, alpha=.2) +
   geom_smooth(method="lm") + facet_grid(~Condition)
 cor(demos.results$value, demos.results$meanCount)#small correlation between pref and accuracy
-ggplot(demos.results.f, aes(meanCount, as.numeric(occupation=="Science and Technology"))) +
+ggplot(demos.results, aes(meanCount, as.numeric(occupation=="Science and Technology"))) +
   geom_jitter(height=.1, width=.1, alpha=.2) +
   geom_smooth(method="lm") + facet_grid(~Condition)
 cor(demos.results$value, demos.results$meanCount)
 
 
+df1 = select(demos.results, age, gender, education, occupation, value)
+df1[] <- lapply(df1, function(x) {
+    if(is.factor(x)) as.numeric(as.character(x)) else x
+})
+sapply(df1, class)
 
 
 
@@ -1117,72 +1108,12 @@ ggplot(demos.results, aes(value, as.numeric(gender))) +
   geom_jitter(height=.1, width=.1, alpha=.2) +
   geom_smooth(method="lm")
 cor(demos.results$value[-86], as.numeric(demos.results$gender[-86]))
-cor(demos.results$value[-120], as.numeric(demos.results$gender[-120]))
-
-```
-
-Regression testing occupation to predict performance?
-```{r}
-accTime.filtered.r = merge(accTime.filtered,demos.results.f)
-
-accTime.filtered.r$occupation = droplevels(as.factor(accTime.filtered.r$occupation))
-contrasts(accTime.filtered.r$occupation) = contr.sum(12) #maybe deviation coding isn't the best idea with such unbalanced groups
-
-Acc.c<-glmer(Mean ~ Condition + (1|worker),  data = accTime.filtered.r)
-  summary(Acc.c)
-Acc.co <-glmer(Mean ~ Condition * occupation + (1|worker),  data = accTime.filtered.r)#not sure what to do about contrasts
-  summary(Acc.o)
-  
-anova(Acc.c,Acc.co)
 
 
-RT.c <-lmer(RT ~ Condition + (1|worker),  data = accTime.filtered.r)
-  summary(RT.c)
-RT.co <-lmer(RT ~ Condition * occupation + (1|worker),  data = accTime.filtered.r)#not sure what to do about contrasts
-  summary(Acc.o)
-  
-anova(RT.c,RT.co)
 ```
 
 ```{r}
 #Compare accuracy/speed/preference with stragegy response quality
-
-dcs = dplyr::select(dc, worker, comments)
-dcs$len = sapply(as.character(dcs$comments), nchar)
-dcs = merge(dcs,dplyr::select(demos.results,worker, value), by="worker")
-dcs = merge(dcs,accTime.summarise)
-dcs.f = subset(dcs,!(worker %in% remove))
-
-
-ggplot(demos.results, aes(meanCount, dcs$len)) + #make sure the workers match
-  geom_jitter(height=.1, width=.1, alpha=.2) +
-  geom_smooth(method="lm") + facet_grid(~Condition) + theme_bw()
-cor(dcs$len, demos.results$meanCount)
-cor(dcs$len, demos.results$value)
-
-  with(subset(demos.results, Condition=="Plain"), cor(meanCount, value))
-  with(subset(demos.results, Condition=="Markup"), cor(meanCount, value))
-  
-  with(demos.results, cor(meanCount,prefSame))
-  ggplot(demos.results, aes(meanCount, value)) + 
-    geom_jitter(height=.1, width=.1, alpha=.2) +
-    geom_smooth(method="lm") + facet_grid(~Condition) + theme_bw() + ylab("Preference (1 = Plain, 21 = Markup)") + xlab("Accuracy count")
-  
-#Without filtering
-
-cor(dcs$len, dcs$meanCount)
-cor(dcs$len, dcs$meanRT)
-
-ggplot(dcs, aes(meanCount, len)) +
-  geom_jitter(height=.1, width=.1, alpha=.2) +
-  geom_smooth(method="lm") + facet_grid(~Condition) + theme_bw()
-
-
-ggplot(dcs, aes(value, len)) +
-  geom_jitter(height=.1, width=.1, alpha=.2) +
-  geom_smooth(method="lm") + facet_grid(~Condition) + theme_bw()
-
-
 
 ```
 
@@ -1241,6 +1172,25 @@ prefOrderMedians = data.frame(
 
 ##Look just at those who scored above chance
 ```{r}
+dcs = select(dc, worker, comments)
+dcs.f = subset(dcs,!(worker %in% remove))
+dcs.f$len = sapply(as.character(dcs.f$comments), nchar)
+
+ggplot(demos.results, aes(meanCount, dcs.f$len)) +
+  geom_jitter(height=.1, width=.1, alpha=.2) +
+  geom_smooth(method="lm") + facet_grid(~Condition)
+
+cor(dcs.f$len, demos.results$value)
+
+#Without filtering
+dcs = merge(dcs,accTime.summarise)
+cor(dcs$len, dcs$meanCount)
+cor(dcs$len, dcs$meanRT)
+
+ggplot(dcs, aes(meanCount, len)) +
+  geom_jitter(height=.1, width=.1, alpha=.2) +
+  geom_smooth(method="lm") + facet_grid(~Condition) + theme_bw()
+
 ```
 
 
@@ -1325,57 +1275,26 @@ Trust in Automation
 ```{r}
 drs = dplyr::select(dr, worker, qType, cond, contains("trust"))
 drs[seq(1,nrow(drs),2),"cond"] = drs[seq(0,nrow(drs),2),"cond"]
-drsv = merge(drs, dplyr::select(demos.results,worker,occupation,meanCount,meanRT,value,prefSame), by="worker")
-drsv$trustNeg = rowSums(dplyr::select(drsv,trust1,trust2,trust3,trust4,trust5 ))
-drsv$trustPos = rowSums(dplyr::select(drsv,trust6,trust7,trust8,trust9,trust10,trust11,trust12 ))
-drsv$trust = drsv$trustPos + (8*5 - drsv$trustNeg)
-
-drsv.f =  subset(drsv,!(worker %in% remove))
 
 
 ts = tail(drs[,(ncol(drs)-11):ncol(drs)], -1) - head(drs[,(ncol(drs)-11):ncol(drs)],-1)
 dTr = cbind(dr[0:(nrow(drs)-1),0:(ncol(drs)-12)],ts)[(0:((nrow(dt)/2) -1) * 2 )+1,]
 dTr =  subset(dTr,!(worker %in% remove))
-dTr$trustNeg = rowSums(dplyr::select(dTr,trust1,trust2,trust3,trust4,trust5 ))
-dTr$trustPos = rowSums(dplyr::select(dTr,trust6,trust7,trust8,trust9,trust10,trust11,trust12 ))
-
+dTr$trustNeg = rowSums(select(dTr,trust1,trust2,trust3,trust4,trust5 ))
+dTr$trustPos = rowSums(select(dTr,trust6,trust7,trust8,trust9,trust10,trust11,trust12 ))
 
 #filter
 
 #Can pool negative (1-5) and positive (6-12) ?
-ggplot(demos.results.f, aes(value, dTr$trustNeg)) +
+ggplot(demos.results, aes(value, dTr$trustNeg)) +
   geom_jitter(height=.1, width=.1, alpha=.2) +
   geom_smooth(method="lm")
-cor(demos.results.f$value, dTr$trustPos)
-cor(demos.results.f$value, dTr$trustNeg)
+cor(demos.results$value, dTr$trustPos)
+cor(demos.results$value, dTr$trustNeg)
 
-ggplot(demos.results.f, aes(meanCount, dTr$trustPos)) +
+ggplot(demos.results, aes(as.numeric(occupation=="Science and Technology"), dTr$trustPos)) +
   geom_jitter(height=.1, width=.1, alpha=.2) +
-  geom_smooth(method="lm") + facet_wrap(~Condition) + theme_bw()
+  geom_smooth(method="lm")
+cor(as.numeric(demos.results$occupation=="Science and Technology"), dTr$trustPos)
 
-cor(demos.results.f$meanCount, dTr$trustPos)
-cor(demos.results.f$meanCount, dTr$trustNeg)
-
-
-
-
-#Check baseline trust
-
-
-ggplot(drsv.f, aes(trust,value)) +
-  geom_jitter(height=.1, width=.1, alpha=.2) +
-  geom_smooth(method="lm") + facet_wrap(~cond) + theme_bw()
-with(drsv.f, cor(trust,value))
-  with(subset(drsv.f,cond=="P"), cor(trust,value))
-  with(subset(drsv.f,cond=="M"), cor(trust,value))
-with(drsv, cor(trustPos,value))
-with(drsv, cor(trustNeg,value))
-
-ggplot(drsv, aes(trust,meanCount)) +
-  geom_jitter(height=.1, width=.1, alpha=.2) +
-  geom_smooth(method="lm") + facet_wrap(~cond) + theme_bw()
-with(drsv.f, cor(trust,meanCount))
-with(drsv.f, cor(trust,meanRT))
-with(drsv, cor(trustPos,meanCount))
-with(drsv, cor(trustNeg,meanCount))
 ```

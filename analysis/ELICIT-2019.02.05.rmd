@@ -302,7 +302,7 @@ cm.f = as.vector(sapply(c("Plain","Markup") , function(x) median(subset(accTime.
 tm.f = as.vector(sapply(c("Plain","Markup") , function(x) median(subset(accTime.filtered, Condition==x)$RT)))
 d.m.f = data.frame(Condition=levels(accTime.filtered$Condition), cval=cm.f, tval=tm.f)
 
-pdf("scatter.pdf",3,2)
+pdf("scatter.pdf",3.2,2.2)
 ggplot(accTime, aes(x=RT, y=Count, color=Condition)) +
   geom_point(alpha=.3) + scale_color_manual(values=c(Plain="black", Markup="navyblue")) +
   geom_vline(aes(xintercept=tval), colour="#888888", linetype="dashed", data=d.m.f)+
@@ -356,7 +356,7 @@ ct.diff.mean + (z*ct.diff.var)/sqrt(nrow(accTime.wide))
 #Normality - looks pretty normal
 hist(subset(accTime, Condition=="Markup")$Count-subset(accTime, Condition=="Plain")$Count)
 #Normality - not close enough to normal
-shapiro.test(subset(accTime, Condition=="markup")$Count-subset(accTime, Condition=="plain")$Count)
+shapiro.test(subset(accTime, Condition=="Markup")$Count-subset(accTime, Condition=="Plain")$Count)
 #Non-parametric Wilcoxon signed rank test
 wilcox.test(subset(accTime.filtered, Condition=="Markup")$Count, subset(accTime.filtered,Condition=="Plain")$Count, paired=FALSE)
 #faster on plain
@@ -620,10 +620,10 @@ T-tests
 ```{r}
 
 #Paired t-test
-t.test(subset(dt, cond=="markup")$responseTime, subset(dt, cond=="plain")$responseTime, paired=TRUE)
-t.test(subset(accTime, Condition=="markup")$RT, subset(accTime,Condition=="plain")$RT, paired=TRUE)
+t.test(subset(dt, cond=="Markup")$responseTime, subset(dt, cond=="Plain")$responseTime, paired=TRUE)
+t.test(subset(accTime, Condition=="Markup")$RT, subset(accTime,Condition=="Plain")$RT, paired=TRUE)
 
-t.test(subset(avacc, Condition=="markup")$Mean, subset(avacc,Condition=="plain")$Mean, paired=TRUE)
+t.test(subset(avacc, Condition=="Markup")$Mean, subset(avacc,Condition=="Plain")$Mean, paired=TRUE)
 
 
 #####
@@ -635,14 +635,14 @@ ggplot(dt, aes(log(1/responseTime)))+
 
 ggplot(avacc, aes(Mean))+
   stat_bin(bins=8)
-avacc.diff=data.frame(diff=subset(avacc,Condition=="plain")$Mean-subset(avacc,Condition=="markup")$Mean)
+avacc.diff=data.frame(diff=subset(avacc,Condition=="Plain")$Mean-subset(avacc,Condition=="Markup")$Mean)
 ggplot(avacc.diff, aes(diff))+
   stat_bin(binwidth=.05)
 
 qqnorm(dt$responseTime)
 qqnorm(log(1/dt$responseTime))
 
-qqnorm(subset(avacc,Condition=="plain")$Mean-subset(avacc,Condition=="markup")$Mean)
+qqnorm(subset(avacc,Condition=="Plain")$Mean-subset(avacc,Condition=="Markup")$Mean)
 #one place says " If the condition of normality is not met, the Wilcoxon rank sum test (Mann-Whitney U test) is used for independent samples, and the Wilcoxon sign rank test is used for paired samples for an additional nonparametric test."
 #"A Wilcoxon signed-rank test is a nonparametric test that can be used to determine whether two dependent samples were selected from populations having the same distribution"
 ggplot(data=accTime, aes(Count)) +
@@ -661,20 +661,20 @@ shapiro.test(avacc.diff$diff)#today it's not normal?
 
 
 
-wilcox.test(subset(avacc, Condition=="markup")$Mean, subset(avacc,Condition=="plain")$Mean, paired=TRUE)
-wilcox.test(subset(accTime, Condition=="markup")$Count, subset(accTime,Condition=="plain")$Count, paired=TRUE)#why are these two giving different values?? Weird decimal ranks
-se(subset(accTime, Condition=="markup")$Count - subset(accTime,Condition=="plain")$Count)
+wilcox.test(subset(avacc, Condition=="Markup")$Mean, subset(avacc,Condition=="Plain")$Mean, paired=TRUE)
+wilcox.test(subset(accTime, Condition=="Markup")$Count, subset(accTime,Condition=="Plain")$Count, paired=TRUE)#why are these two giving different values?? Weird decimal ranks
+se(subset(accTime, Condition=="Markup")$Count - subset(accTime,Condition=="Plain")$Count)
 #rank correction for effect size?
 
 
 #Accuracy isn't exactly continuous here (8 possible values)
 
 #Homogeneity of variance (Doesn't matter since sampling same population?)
-var(subset(dt, cond=="markup")$responseTime, na.rm=TRUE)
-var(subset(dt, cond=="plain")$responseTime, na.rm=TRUE)
+var(subset(dt, cond=="Markup")$responseTime, na.rm=TRUE)
+var(subset(dt, cond=="Plain")$responseTime, na.rm=TRUE)
 
-var(subset(avacc, Condition=="markup")$Mean)
-var(subset(avacc, Condition=="plain")$Mean)
+var(subset(avacc, Condition=="Markup")$Mean)
+var(subset(avacc, Condition=="Plain")$Mean)
 #####
 
 
@@ -1022,15 +1022,15 @@ ggplot(scenMed, aes(Scenario, RT, fill=Condition)) +
 demos = dt[(0:((nrow(dt)/2) -1) * 2 )+1, c("worker","language","age","gender","education","occupation","comments")]
 
 #Do you consider English your first or primary language? 
-table(demos$language)
+table(demos.results$language)
 #Please select your age range: 
-table(demos$age)
+table(demos.results$age)
 #Please select your gender: 
-table(demos$gender)
+table(demos.results$gender)
 #Please select your highest level of educational attainment: 
-table(demos$education)
+table(demos.results$education)
 
-table(demos$occupation)
+table(demos.results$occupation)
 
 accTime.summarise = 
   accTime %>%
@@ -1116,8 +1116,52 @@ cor(demos.results$value, demos.results$meanCount)
 ggplot(demos.results, aes(value, as.numeric(gender))) +
   geom_jitter(height=.1, width=.1, alpha=.2) +
   geom_smooth(method="lm")
-cor(demos.results$value[-86], as.numeric(demos.results$gender[-86]))
+cor(demos.results.f$value[-86], as.numeric(demos.results.f$gender[-86]))
 cor(demos.results$value[-120], as.numeric(demos.results$gender[-120]))
+
+
+#Filtered or unfiltered (probably filtered is fairest, otherwise RT is more looking to predict slackers)?
+demos.results[-120,] %>% group_by(Condition) %>% summarise(count=cor(as.numeric(gender),meanCount), RT=cor(as.numeric(gender),meanRT), pref=cor(as.numeric(gender),value))
+demos.results %>% group_by(Condition) %>% summarise(count=cor(as.numeric(age),meanCount), RT=cor(as.numeric(age),meanRT), pref=cor(as.numeric(age),value))
+demos.results %>% group_by(Condition) %>% summarise(count=cor(as.numeric(education),meanCount), RT=cor(as.numeric(education),meanRT), pref=cor(as.numeric(education),value))
+demos.results %>% group_by(Condition) %>% summarise(count=cor(as.numeric(occupation=="Science and Technology"),meanCount), RT=cor(as.numeric(occupation=="Science and Technology"),meanRT), pref=cor(as.numeric(occupation=="Science and Technology"),value))
+
+
+demos.results.f %>% group_by(Condition) %>% summarise(count=cor(as.numeric(language),meanCount), RT=cor(as.numeric(language),meanRT), pref=cor(as.numeric(language),value))
+demos.results.f[-86,] %>% group_by(Condition) %>% summarise(count=cor(as.numeric(gender),meanCount), RT=cor(as.numeric(gender),meanRT), pref=cor(as.numeric(gender),value))
+with(demos.results.f[-86,], cor(as.numeric(gender), prefSame))
+demos.results.f %>% group_by(Condition) %>% summarise(count=cor(as.numeric(age),meanCount), RT=cor(as.numeric(age),meanRT), pref=cor(as.numeric(age),value))
+demos.results.f %>% group_by(Condition) %>% summarise(count=cor(as.numeric(education),meanCount), RT=cor(as.numeric(education),meanRT), pref=cor(as.numeric(education),value))
+demos.results.f %>% group_by(Condition) %>% summarise(count=cor(as.numeric(occupation=="Science and Technology"),meanCount), RT=cor(as.numeric(occupation=="Science and Technology"),meanRT), pref=cor(as.numeric(occupation=="Science and Technology"),value)) 
+
+
+ggplot(demos.results.f[-86], aes(value, gender)) +
+  geom_jitter(height=.1, width=.1, alpha=.2) +
+  #geom_smooth(method="lm") + 
+  theme_bw() + ylab("Gender") + xlab("Preference (1=Plain, 21=Markup)")
+
+ggplot(demos.results, aes(value, age)) +
+  geom_jitter(height=.1, width=.1, alpha=.2) +
+  #geom_smooth(method="lm") + 
+  theme_bw() + ylab("Age") + xlab("Preference (1=Plain, 21=Markup)")
+
+ggplot(demos.results, aes(value, education)) +
+  geom_jitter(height=.1, width=.1, alpha=.2) +
+  #geom_smooth(method="lm") + 
+  theme_bw() + ylab("Education") + xlab("Preference (1=Plain, 21=Markup)")
+
+
+ggplot(demos.results, aes(value, occupation)) +
+  geom_jitter(height=.1, width=.1, alpha=.2) +
+  #geom_smooth(method="lm") + 
+  theme_bw() + ylab("Occupation") + xlab("Preference (1=Plain, 21=Markup)")
+
+
+
+ggplot(demos.results.f[-86], aes(meanCount, gender, color=Condition)) +
+  geom_jitter(height=.1, width=.1, alpha=.2) +
+  #geom_smooth(method="lm") + 
+  theme_bw() + ylab("Gender") + xlab("Accuracy count")
 
 ```
 
