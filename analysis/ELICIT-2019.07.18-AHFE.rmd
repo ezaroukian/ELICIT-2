@@ -1118,16 +1118,9 @@ ggplot(scenMed, aes(Scenario, RT, fill=Condition)) +
 #grab one row per person (won't capture all comments, blocked)
 demos = dt[(0:((nrow(dt)/2) -1) * 2 )+1, c("worker","language","age","gender","education","occupation","comments")]
 
-#Do you consider English your first or primary language? 
-table(demos.results$language)
-#Please select your age range: 
-table(demos.results$age)
-#Please select your gender: 
-table(demos.results$gender)
-#Please select your highest level of educational attainment: 
-table(demos.results$education)
+#demos.results = merge(demos,accTime[,c("worker","Count","RT")]) #I hope this is wrong, because the numbers don't match up
 
-table(demos.results$occupation)
+
 
 accTime.summarise = 
   accTime %>%
@@ -1149,6 +1142,17 @@ demos.results.f = merge(demos, accTime.filtered.summarise)
 demos.results.f = merge(demos.results.f,dq.m.filtered[dq.m.filtered$variable=="preference",c("worker","value")], by="worker")#doesn't have preference yet
 demos.results.f$prefSame = demos.results.f$value
 demos.results.f[demos.results.f$Condition=="Plain","prefSame"] = 22 - demos.results.f[demos.results.f$Condition=="Plain","value"] #flip scale
+
+#Do you consider English your first or primary language? 
+table(demos.results$language)
+#Please select your age range: 
+table(demos.results$age)
+#Please select your gender: 
+table(demos.results$gender)
+#Please select your highest level of educational attainment: 
+table(demos.results$education)
+
+table(demos.results$occupation)
 
 demr = 
 demos.results %>%
@@ -1261,6 +1265,142 @@ ggplot(demos.results.f[-86], aes(meanCount, gender, color=Condition)) +
   theme_bw() + ylab("Gender") + xlab("Accuracy count")
 
 ```
+
+```{r}
+#Correlations with accuracy, RT, preference
+
+
+#Language
+ggplot(demos.results.f, aes(meanCount, as.numeric(language))) +
+  geom_jitter(height=.1) +
+  geom_smooth(method="lm")+ facet_grid(~Condition) +
+  ylab("Language") + xlab("Accuracy") + theme_bw()
+#with(demos.results.f, cor(meanCount, language=="Yes"))
+#  with(subset(demos.results.f, Condition=="Plain"), cor(meanCount, language=="Yes"))
+#  with(subset(demos.results.f, Condition=="Markup"), cor(meanCount, language=="Yes"))
+
+ggplot(demos.results.f, aes(meanRT, as.numeric(language))) +
+  geom_jitter(height=.1) +
+  geom_smooth(method="lm")+ facet_grid(~Condition) +
+  ylab("Language") + xlab("RT") + theme_bw()
+#with(demos.results.f, cor(meanRT, language=="Yes"))
+#  with(subset(demos.results.f, Condition=="Plain"), cor(meanRT, language=="Yes"))
+#  with(subset(demos.results.f, Condition=="Markup"), cor(meanRT, language=="Yes"))
+
+ggplot(demos.results.f, aes(value, as.numeric(language))) +
+  geom_jitter(height=.1) +
+  geom_smooth(method="lm")+ facet_grid(~Condition) +
+  ylab("Language") + xlab("Preference") + theme_bw()
+#with(demos.results.f, cor(value, language=="Yes"))
+#  with(subset(demos.results.f, Condition=="Plain"), cor(value, language=="Yes"))
+#  with(subset(demos.results.f, Condition=="Markup"), cor(value, language=="Yes"))
+  
+
+#Gender
+ggplot(demos.results.f, aes(meanCount, as.numeric(language))) +
+  geom_jitter(height=.1) +
+  geom_smooth(method="lm")+ facet_grid(~Condition) +
+  ylab("Gender") + xlab("Accuracy") + theme_bw()
+#with(demos.results.f, cor(meanCount, language=="Yes"))
+#  with(subset(demos.results.f, Condition=="Plain"), cor(meanCount, language=="Yes"))
+#  with(subset(demos.results.f, Condition=="Markup"), cor(meanCount, language=="Yes"))
+
+ggplot(demos.results.f, aes(meanRT, as.numeric(language))) +
+  geom_jitter(height=.1) +
+  geom_smooth(method="lm")+ facet_grid(~Condition) +
+  ylab("Gender") + xlab("RT") + theme_bw()
+#with(demos.results.f, cor(meanRT, language=="Yes"))
+#  with(subset(demos.results.f, Condition=="Plain"), cor(meanRT, language=="Yes"))
+#  with(subset(demos.results.f, Condition=="Markup"), cor(meanRT, language=="Yes"))
+
+ggplot(demos.results.f, aes(value, as.numeric(language))) +
+  geom_jitter(height=.1) +
+  geom_smooth(method="lm")+ facet_grid(~Condition) +
+  ylab("Gender") + xlab("Preference") + theme_bw()
+#with(demos.results.f, cor(value, language=="Yes"))
+#  with(subset(demos.results.f, Condition=="Plain"), cor(value, language=="Yes"))
+#  with(subset(demos.results.f, Condition=="Markup"), cor(value, language=="Yes"))
+  
+  
+#Age
+ggplot(demos.results.f, aes(meanCount, as.numeric(age))) +
+  geom_jitter(height=.1) +
+  geom_smooth(method="lm")+ facet_grid(~Condition) +
+  ylab("Age") + xlab("Accuracy") + theme_bw()
+#with(demos.results.f, cor(meanCount, language=="Yes"))
+#  with(subset(demos.results.f, Condition=="Plain"), cor(meanCount, as.numeric(age)))
+#  with(subset(demos.results.f, Condition=="Markup"), cor(meanCount, as.numeric(age)))
+
+ggplot(demos.results.f, aes(meanRT, as.numeric(age))) +
+  geom_jitter(height=.1) +
+  geom_smooth(method="lm")+ facet_grid(~Condition) +
+  ylab("Age") + xlab("RT") + theme_bw()
+#with(demos.results.f, cor(meanRT, language=="Yes"))
+#  with(subset(demos.results.f, Condition=="Plain"), cor(meanRT, as.numeric(age)))
+#  with(subset(demos.results.f, Condition=="Markup"), cor(meanRT, as.numeric(age)))
+
+ggplot(demos.results.f, aes(value, as.numeric(age))) +
+  geom_jitter(height=.1) +
+  geom_smooth(method="lm")+ facet_grid(~Condition) +
+  ylab("Age") + xlab("Preference") + theme_bw()
+#with(demos.results.f, cor(value, language=="Yes"))
+#  with(subset(demos.results.f, Condition=="Plain"), cor(value, as.numeric(age)))
+#  with(subset(demos.results.f, Condition=="Markup"), cor(value, as.numeric(age)))
+  
+  
+#Education
+ggplot(demos.results.f, aes(meanCount, as.numeric(education))) +
+  geom_jitter(height=.1) +
+  geom_smooth(method="lm")+ facet_grid(~Condition) +
+  ylab("Education") + xlab("Accuracy") + theme_bw()
+#with(demos.results.f, cor(meanCount, language=="Yes"))
+#  with(subset(demos.results.f, Condition=="Plain"), cor(meanCount, as.numeric(education)))
+#  with(subset(demos.results.f, Condition=="Markup"), cor(meanCount, as.numeric(education)))
+
+ggplot(demos.results.f, aes(meanRT, as.numeric(education))) +
+  geom_jitter(height=.1) +
+  geom_smooth(method="lm")+ facet_grid(~Condition) +
+  ylab("Education") + xlab("RT") + theme_bw()
+#with(demos.results.f, cor(meanRT, language=="Yes"))
+#  with(subset(demos.results.f, Condition=="Plain"), cor(meanRT, as.numeric(education)))
+#  with(subset(demos.results.f, Condition=="Markup"), cor(meanRT, as.numeric(education)))
+
+ggplot(demos.results.f, aes(value, as.numeric(education))) +
+  geom_jitter(height=.1) +
+  geom_smooth(method="lm")+ facet_grid(~Condition) +
+  ylab("Education") + xlab("Preference") + theme_bw()
+#with(demos.results.f, cor(value, language=="Yes"))
+#  with(subset(demos.results.f, Condition=="Plain"), cor(value, as.numeric(education)))
+#  with(subset(demos.results.f, Condition=="Markup"), cor(value, as.numeric(education)))
+  
+  
+#Occupation
+ggplot(demos.results.f, aes(meanCount, as.numeric(occupation=="Science and Technology"))) +
+  geom_jitter(height=.1) +
+  geom_smooth(method="lm")+ facet_grid(~Condition) +
+  ylab("Occupation") + xlab("Accuracy") + theme_bw()
+#with(demos.results.f, cor(meanCount, language=="Yes"))
+#  with(subset(demos.results.f, Condition=="Plain"), cor(meanCount, as.numeric(occupation=="Science and Technology")))
+#  with(subset(demos.results.f, Condition=="Markup"), cor(meanCount, as.numeric(occupation=="Science and Technology")))
+
+ggplot(demos.results.f, aes(meanRT, as.numeric(occupation=="Science and Technology"))) +
+  geom_jitter(height=.1) +
+  geom_smooth(method="lm")+ facet_grid(~Condition) +
+  ylab("Occupation") + xlab("RT") + theme_bw()
+#with(demos.results.f, cor(meanRT, language=="Yes"))
+#  with(subset(demos.results.f, Condition=="Plain"), cor(meanRT, as.numeric(occupation=="Science and Technology")))
+#  with(subset(demos.results.f, Condition=="Markup"), cor(meanRT, as.numeric(occupation=="Science and Technology")))
+
+ggplot(demos.results.f, aes(value, as.numeric(occupation=="Science and Technology"))) +
+  geom_jitter(height=.1) +
+  geom_smooth(method="lm")+ facet_grid(~Condition) +
+  ylab("Occupation") + xlab("Preference") + theme_bw()
+#with(demos.results.f, cor(value, language=="Yes"))
+#  with(subset(demos.results.f, Condition=="Plain"), cor(value, as.numeric(occupation=="Science and Technology")))
+#  with(subset(demos.results.f, Condition=="Markup"), cor(value, as.numeric(occupation=="Science and Technology")))
+
+```
+
 
 Regression testing occupation to predict performance?
 ```{r}
