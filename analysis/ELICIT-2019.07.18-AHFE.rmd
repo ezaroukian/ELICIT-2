@@ -1727,3 +1727,49 @@ Anova(my_anova_RT, type = "III")#unbalanced
 
 ```
 
+```{r}
+#Do you perform better if you prefer what you saw?
+
+
+
+#Prefernce score
+dataPref
+#Performance scores
+accTime.filtered
+
+accTime.filtered.pref = merge(accTime.filtered, dataPref[,c("worker","preference")])
+
+accTime.filtered.pref$Preference = "N/A"
+accTime.filtered.pref[accTime.filtered.pref$preference >11,]$Preference = "Markup"
+accTime.filtered.pref[accTime.filtered.pref$preference <11,]$Preference = "Plain"
+
+accTime.filtered.pref$PreferenceBin = "N/A"
+accTime.filtered.pref[accTime.filtered.pref$Condition == accTime.filtered.pref$Preference,]$PreferenceBin = "Same"
+accTime.filtered.pref[accTime.filtered.pref$Condition != accTime.filtered.pref$Preference,]$PreferenceBin = "Different"
+accTime.filtered.pref[accTime.filtered.pref$Preference == "N/A",]$PreferenceBin = "N/A"
+
+
+accTime.filtered.pref.sum = 
+  accTime.filtered.pref %>%
+  group_by(PreferenceBin) %>% #or Condition, Preference
+  summarise(N= n(), meanAcc = mean(Count), meanRT=mean(RT))
+
+accTime.filtered.pref %>%
+  group_by(Preference, Condition) %>% #or Condition, Preference
+  summarise(N= n(), medAcc = median(Count), medRT=median(RT))
+
+accTime.filtered.pref = subset(accTime.filtered.pref, Preference != "N/A")
+
+wilcox.test(accTime.filtered.pref$Count~accTime.filtered.pref$PreferenceBin) 
+wilcox.test(accTime.filtered.pref$RT~accTime.filtered.pref$PreferenceBin) 
+
+
+ggplot(accTime.filtered.pref.sum, aes(PreferenceBin, meanAcc) )+
+  geom_point() 
+
+ggplot(accTime.filtered.pref.sum, aes(Condition, meanAcc) )+
+  geom_point() + 
+  facet_wrap(~PreferenceBin)
+
+```
+
